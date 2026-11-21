@@ -17,7 +17,7 @@ import re
 import sys
 from collections import Counter, defaultdict
 
-EXP = re.compile(r'^\s*(\S+)\s+"(-?[0-9.]+[eE][-+]?[0-9]+)"\^\^xsd:decimal')
+EXP = re.compile(r'(\S+)\s+"(-?[0-9.]+[eE][-+]?[0-9]+)"\^\^xsd:decimal')
 PARTIAL = re.compile(r'^\s*(\S*[Dd]ate\S*)\s+"(\d{4}(?:-\d{2})?)"\s*[;.,]?\s*$')
 
 
@@ -35,7 +35,7 @@ def main(roots):
                     with open(path, encoding="utf-8", errors="replace") as f:
                         for line in f:
                             if "e" in line and "xsd:decimal" in line:
-                                m = EXP.match(line)
+                                m = EXP.search(line)
                                 if m:
                                     exp += 1
                                     report["exponent_by_predicate"][m.group(1)] += 1
