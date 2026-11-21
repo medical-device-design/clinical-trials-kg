@@ -103,6 +103,31 @@ def main():
           (rdflib.URIRef(ID + "publication/31234567"), rdflib.URIRef("http://www.w3.org/2004/02/skos/core#exactMatch"),
            rdflib.URIRef("https://identifiers.org/pubmed:31234567")) in g)
 
+    print("sections added after the pilot field audit")
+    started = [m for m in g.subjects(EX.milestoneType, rdflib.Literal("STARTED"))]
+    check("participant flow: STARTED milestone per group", len(started) == 2, len(started))
+    check("participant flow: withdrawal reason kept",
+          len(list(g.subjects(EX.withdrawalReason, rdflib.Literal("Lost to Follow-up")))) == 2)
+    check("baseline: age measurements typed with group links",
+          len(list(g.subjects(RDF.type, EX.BaselineMeasurement))) == 2
+          and all((g.value(m, EX.group), RDF.type, EX.BaselineGroup) in g
+                  for m in g.subjects(RDF.type, EX.BaselineMeasurement)))
+    doc = next(iter(g.subjects(RDF.type, EX.StudyDocument)), None)
+    check("protocol document with derived URL",
+          doc is not None and str(g.value(doc, EX.derivedUrl)).endswith("/01/NCT09000001/Prot_SAP_000.pdf"))
+    check("reference retraction flagged and linked",
+          (None, EX.isRetracted, rdflib.Literal(True)) in g
+          and (None, EX.retractionNotice, rdflib.URIRef(ID + "publication/39999999")) in g)
+    check("NCT alias kept", g.value(S1, EX.nctIdAlias) == rdflib.Literal("NCT08999999"))
+    check("source version date typed",
+          g.value(S1, EX.sourceVersionDate) == rdflib.Literal("2026-11-20", datatype=XSD.date))
+    check("unposted-results event and submission cycle kept",
+          len(list(g.subjects(RDF.type, EX.UnpostedResultsEvent))) == 1
+          and len(list(g.subjects(RDF.type, EX.ResultsSubmissionCycle))) == 1)
+    check("arm linked to intervention via armGroups.interventionNames",
+          (rdflib.URIRef(ID + "study/NCT09000001/intervention/1"), EX.inArm,
+           rdflib.URIRef(ID + "study/NCT09000001/arm/1")) in g)
+
     print("privacy")
     ttl = "".join(open(os.path.join(out, f)).read() for f in os.listdir(out) if f.endswith(".ttl"))
     check("no e-mail addresses anywhere", "@testco" not in ttl and "@clinic" not in ttl)

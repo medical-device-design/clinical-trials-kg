@@ -208,6 +208,36 @@ def convert_study(w, rec, retrieved_at):
         ("ex:ipdSharing", lit(ipd.get("ipdSharing"))),
         ("ex:ipdSharingDescription", text_lit(ipd.get("description"))),
         ("ex:responsiblePartyType", lit(resp.get("type"))),
+        ("ex:responsibleInvestigatorTitle", lit(resp.get("investigatorTitle"))),
+        ("ex:responsiblePartyOldNameTitle", lit(resp.get("oldNameTitle"))),
+        ("ex:responsiblePartyOldOrganization", lit(resp.get("oldOrganization"))),
+        ("ex:orgStudyIdType", lit(_g(ident, "orgStudyIdInfo", "type"))),
+        ("ex:orgStudyIdLink", lit(_g(ident, "orgStudyIdInfo", "link"))),
+        ("ex:firstQcReleaseDate", date_lit(_g(rec, "derivedSection", "miscInfoModule", "submissionTracking",
+                                              "firstMcpInfo", "postDateStruct", "date"))),
+        ("ex:studyFirstSubmitDate", date_lit(status.get("studyFirstSubmitDate"))),
+        ("ex:studyFirstSubmitQcDate", date_lit(status.get("studyFirstSubmitQcDate"))),
+        ("ex:lastUpdateSubmitDate", date_lit(status.get("lastUpdateSubmitDate"))),
+        ("ex:resultsFirstSubmitDate", date_lit(status.get("resultsFirstSubmitDate"))),
+        ("ex:resultsFirstSubmitQcDate", date_lit(status.get("resultsFirstSubmitQcDate"))),
+        ("ex:dispositionFirstSubmitDate", date_lit(status.get("dispFirstSubmitDate"))),
+        ("ex:dispositionFirstSubmitQcDate", date_lit(status.get("dispFirstSubmitQcDate"))),
+        ("ex:hasExpandedAccess", bool_lit(_g(status, "expandedAccessInfo", "hasExpandedAccess"))),
+        ("ex:expandedAccessNctId", lit(_g(status, "expandedAccessInfo", "nctId"))),
+        ("ex:expandedAccessStatus", lit(_g(status, "expandedAccessInfo", "statusForNctId"))),
+        ("ex:patientRegistry", bool_lit(design.get("patientRegistry"))),
+        ("ex:targetDuration", lit(design.get("targetDuration"))),
+        ("ex:maskingDescription", text_lit(mask.get("maskingDescription"))),
+        ("ex:bioSpecRetention", lit(_g(design, "bioSpec", "retention"))),
+        ("ex:bioSpecDescription", text_lit(_g(design, "bioSpec", "description"))),
+        ("ex:genderDescription", text_lit(elig.get("genderDescription"))),
+        ("ex:ipdAccessCriteria", text_lit(ipd.get("accessCriteria"))),
+        ("ex:ipdTimeFrame", text_lit(ipd.get("timeFrame"))),
+        ("ex:ipdUrl", lit(ipd.get("url"))),
+        ("ex:fdaaa801Violation", bool_lit(oversight.get("fdaaa801Violation"))),
+        ("ex:sourceVersionDate", date_lit(_g(rec, "derivedSection", "miscInfoModule", "versionHolder"))),
+        ("ex:estimatedResultsFirstSubmitDate", date_lit(_g(rec, "derivedSection", "miscInfoModule",
+                                                            "submissionTracking", "estimatedResultsFirstSubmitDate"))),
     ]
     for pred, key in (("ex:startDate", "startDateStruct"),
                       ("ex:primaryCompletionDate", "primaryCompletionDateStruct"),
@@ -220,6 +250,10 @@ def convert_study(w, rec, retrieved_at):
     pairs += [("ex:maskedRole", lit(r)) for r in as_list(mask.get("whoMasked"))]
     pairs += [("ex:stdAge", lit(a)) for a in as_list(elig.get("stdAges"))]
     pairs += [("ex:keyword", lit(k)) for k in as_list(conds.get("keywords"))]
+    pairs += [("ex:ipdInfoType", lit(t)) for t in as_list(ipd.get("infoTypes"))]
+    pairs += [("ex:nctIdAlias", lit(a)) for a in as_list(ident.get("nctIdAliases"))]
+    pairs += [("ex:removedCountry", lit(c)) for c in as_list(_g(rec, "derivedSection", "miscInfoModule", "removedCountries"))]
+    pairs += [("ex:expandedAccessType", lit(k)) for k, v in sorted((design.get("expandedAccessTypes") or {}).items()) if v]
     w.block(S, pairs)
 
     # --- sponsor, collaborators, responsible party ---------------------------
@@ -260,6 +294,16 @@ def convert_study(w, rec, retrieved_at):
                     ("ex:armType", lit(a.get("type"))),
                     ("ex:description", text_lit(a.get("description")))])
         w.block(S, [("ex:hasArm", A)])
+    iv_by_name = {}
+    for i, iv in enumerate(ai.get("interventions") or []):
+        nm = (iv.get("name") or "").strip().lower()
+        if nm:
+            iv_by_name.setdefault(nm, iri.intervention(nct, i))
+    for i, a in enumerate(ai.get("armGroups") or []):
+        for ref in as_list(a.get("interventionNames")):
+            target = iv_by_name.get(ref.split(":", 1)[-1].strip().lower())
+            if target:
+                w.block(target, [("ex:inArm", iri.arm(nct, i))])
     for i, iv in enumerate(ai.get("interventions") or []):
         I = iri.intervention(nct, i)
         pairs = [("a", "ex:Intervention"), ("rdfs:label", text_lit(iv.get("name"))),
@@ -322,8 +366,28 @@ def convert_study(w, rec, retrieved_at):
                  ("ex:citation", text_lit(ref.get("citation")))]
         if pmid.isdigit():
             pairs.append(("ex:publication", w.publication(pmid)))
+        for rt in ref.get("retractions") or []:
+            rp = str(rt.get("pmid") or "").strip()
+            if rp.isdigit():
+                pairs.append(("ex:retractionNotice", w.publication(rp)))
+            pairs.append(("ex:retractionSource", text_lit(rt.get("source"))))
+        if ref.get("retractions"):
+            pairs.append(("ex:isRetracted", '"true"^^xsd:boolean'))
         w.block(R, pairs)
         w.block(S, [("ex:hasReference", R)])
+    for i, sa in enumerate(_g(ps, "referencesModule", "seeAlsoLinks") or []):
+        if not (sa.get("url") or "").strip():
+            continue
+        X = iri.see_also(nct, i)
+        w.block(X, [("a", "ex:SeeAlsoLink"), ("rdfs:label", text_lit(sa.get("label"))),
+                    ("ex:url", lit(sa.get("url")))])
+        w.block(S, [("ex:hasSeeAlsoLink", X)])
+    for i, d in enumerate(_g(ps, "referencesModule", "availIpds") or []):
+        X = iri.ipd(nct, i)
+        w.block(X, [("a", "ex:AvailableIpd"), ("ex:ipdId", lit(d.get("id"))),
+                    ("ex:ipdType", lit(d.get("type"))), ("ex:url", lit(d.get("url"))),
+                    ("ex:comment", text_lit(d.get("comment")))])
+        w.block(S, [("ex:hasAvailableIpd", X)])
 
     # --- secondary IDs, plus exact-identifier links into the linkage file -----
     link_i = 0
@@ -334,7 +398,8 @@ def convert_study(w, rec, retrieved_at):
         X = iri.secondary_id(nct, i)
         w.block(X, [("a", "ex:SecondaryIdentifier"), ("ex:identifierValue", lit(val)),
                     ("ex:identifierType", lit(sid.get("type"))),
-                    ("ex:identifierDomain", text_lit(sid.get("domain")))])
+                    ("ex:identifierDomain", text_lit(sid.get("domain"))),
+                    ("ex:identifierLink", lit(sid.get("link")))])
         w.block(S, [("ex:hasSecondaryId", X)])
         for sub_type, number in identifiers.fda_ids(val, sid.get("type")):
             Lk = iri.fda_link(nct, link_i)
@@ -353,12 +418,21 @@ def convert_study(w, rec, retrieved_at):
     res = rec.get("resultsSection") or {}
     _outcome_measures(w, nct, S, _g(res, "outcomeMeasuresModule", "outcomeMeasures") or [])
     _adverse_events(w, nct, S, res.get("adverseEventsModule") or {})
+    _participant_flow(w, nct, S, res.get("participantFlowModule") or {})
+    _baseline(w, nct, S, res.get("baselineCharacteristicsModule") or {})
+    _documents(w, nct, S, _g(rec, "documentSection", "largeDocumentModule") or {})
+    _annotations(w, nct, S, _g(rec, "annotationSection", "annotationModule") or {})
+    _submissions(w, nct, S, _g(rec, "derivedSection", "miscInfoModule", "submissionTracking",
+                               "submissionInfos") or [])
     more = res.get("moreInfoModule") or {}
     if more:
         lim = more.get("limitationsAndCaveats") or {}
         agree = more.get("certainAgreement") or {}
         w.block(S, [("ex:limitationsAndCaveats", text_lit(lim.get("description"))),
                     ("ex:piSponsorEmployee", bool_lit(agree.get("piSponsorEmployee"))),
+                    ("ex:restrictiveAgreement", bool_lit(agree.get("restrictiveAgreement"))),
+                    ("ex:restrictionType", lit(agree.get("restrictionType"))),
+                    ("ex:restrictionDetails", text_lit(agree.get("otherDetails"))),
                     ("ex:resultsPointOfContactOrganization",
                      text_lit(_g(more, "pointOfContact", "organization")))])
     return nct
@@ -378,7 +452,9 @@ def _outcome_measures(w, nct, S, measures):
                     ("ex:dispersionType", lit(om.get("dispersionType"))),
                     ("ex:unitOfMeasure", text_lit(om.get("unitOfMeasure"))),
                     ("ex:calculatePercent", bool_lit(om.get("calculatePct"))),
-                    ("ex:timeFrame", text_lit(om.get("timeFrame")))])
+                    ("ex:timeFrame", text_lit(om.get("timeFrame"))),
+                    ("ex:denomUnitsSelected", lit(om.get("denomUnitsSelected"))),
+                    ("ex:typeUnitsAnalyzed", lit(om.get("typeUnitsAnalyzed")))])
         w.block(S, [("ex:hasOutcomeMeasure", M)])
         groups = {}
         for g in om.get("groups") or []:
@@ -434,7 +510,15 @@ def _outcome_measures(w, nct, S, measures):
                      ("ex:nonInferiorityType", lit(an.get("nonInferiorityType"))),
                      ("ex:nonInferiorityComment", text_lit(an.get("nonInferiorityComment"))),
                      ("ex:groupDescription", text_lit(an.get("groupDescription"))),
-                     ("ex:pValueComment", text_lit(an.get("pValueComment")))]
+                     ("ex:pValueComment", text_lit(an.get("pValueComment"))),
+                     ("ex:statisticalComment", text_lit(an.get("statisticalComment"))),
+                     ("ex:estimateComment", text_lit(an.get("estimateComment"))),
+                     ("ex:dispersionType", lit(an.get("dispersionType"))),
+                     ("ex:dispersionValue", float_lit(an.get("dispersionValue"))),
+                     ("ex:testedNonInferiority", bool_lit(an.get("testedNonInferiority"))),
+                     ("ex:otherAnalysisDescription", text_lit(an.get("otherAnalysisDescription"))),
+                     ("ex:ciLowerLimitComment", text_lit(an.get("ciLowerLimitComment"))),
+                     ("ex:ciUpperLimitComment", text_lit(an.get("ciUpperLimitComment")))]
             pairs += [("ex:comparesGroup", groups[g]) for g in as_list(an.get("groupIds")) if g in groups]
             w.block(A, pairs)
             w.block(M, [("ex:hasAnalysis", A)])
@@ -491,6 +575,162 @@ def _adverse_events(w, nct, S, ae):
                             ("ex:numAtRisk", int_lit(st.get("numAtRisk")))])
                 w.block(T, [("ex:hasStatistic", X)])
 
+
+def _participant_flow(w, nct, S, pf):
+    if not pf:
+        return
+    w.block(S, [("ex:recruitmentDetails", text_lit(pf.get("recruitmentDetails"))),
+                ("ex:preAssignmentDetails", text_lit(pf.get("preAssignmentDetails"))),
+                ("ex:flowTypeUnitsAnalyzed", lit(pf.get("typeUnitsAnalyzed")))])
+    groups = {}
+    for g in pf.get("groups") or []:
+        gid = (g.get("id") or "").strip()
+        if not gid:
+            continue
+        G = iri.pf_group(nct, gid)
+        groups[gid] = G
+        w.block(G, [("a", "ex:FlowGroup"), ("rdfs:label", text_lit(g.get("title"))),
+                    ("ex:groupId", lit(gid)), ("ex:description", text_lit(g.get("description")))])
+        w.block(S, [("ex:hasFlowGroup", G)])
+    for p_i, per in enumerate(pf.get("periods") or []):
+        P = iri.pf_period(nct, p_i)
+        w.block(P, [("a", "ex:FlowPeriod"), ("rdfs:label", text_lit(per.get("title") or f"Period {p_i + 1}"))])
+        w.block(S, [("ex:hasFlowPeriod", P)])
+        for m_i, ms in enumerate(per.get("milestones") or []):
+            for ach in ms.get("achievements") or []:
+                gid = (ach.get("groupId") or "").strip()
+                if not gid:
+                    continue
+                X = iri.pf_milestone(nct, p_i, m_i, gid)
+                w.block(X, [("a", "ex:FlowMilestone"), ("ex:milestoneType", lit(ms.get("type"))),
+                            ("ex:comment", text_lit(ms.get("comment") or ach.get("comment"))),
+                            ("ex:group", groups.get(gid)), ("ex:groupId", lit(gid)),
+                            ("ex:numSubjects", int_lit(ach.get("numSubjects"))),
+                            ("ex:numUnits", int_lit(ach.get("numUnits")))])
+                w.block(P, [("ex:hasMilestone", X)])
+        for d_i, dw in enumerate(per.get("dropWithdraws") or []):
+            for r_i, rs in enumerate(dw.get("reasons") or []):
+                gid = (rs.get("groupId") or "").strip()
+                X = iri.pf_withdrawal(nct, p_i, d_i, r_i)
+                w.block(X, [("a", "ex:FlowWithdrawal"), ("ex:withdrawalReason", lit(dw.get("type"))),
+                            ("ex:comment", text_lit(dw.get("comment") or rs.get("comment"))),
+                            ("ex:group", groups.get(gid)), ("ex:groupId", lit(gid)),
+                            ("ex:numSubjects", int_lit(rs.get("numSubjects")))])
+                w.block(P, [("ex:hasWithdrawal", X)])
+
+
+def _baseline(w, nct, S, bl):
+    if not bl:
+        return
+    w.block(S, [("ex:baselinePopulationDescription", text_lit(bl.get("populationDescription"))),
+                ("ex:baselineTypeUnitsAnalyzed", lit(bl.get("typeUnitsAnalyzed")))])
+    groups = {}
+    for g in bl.get("groups") or []:
+        gid = (g.get("id") or "").strip()
+        if not gid:
+            continue
+        G = iri.bl_group(nct, gid)
+        groups[gid] = G
+        w.block(G, [("a", "ex:BaselineGroup"), ("rdfs:label", text_lit(g.get("title"))),
+                    ("ex:groupId", lit(gid)), ("ex:description", text_lit(g.get("description")))])
+        w.block(S, [("ex:hasBaselineGroup", G)])
+    for d_i, d in enumerate(bl.get("denoms") or []):
+        for c in d.get("counts") or []:
+            gid = (c.get("groupId") or "").strip()
+            if not gid:
+                continue
+            D = iri.bl_denom(nct, d_i, gid)
+            w.block(D, [("a", "ex:BaselineDenominator"), ("ex:units", lit(d.get("units"))),
+                        ("ex:group", groups.get(gid)), ("ex:groupId", lit(gid)),
+                        ("ex:count", int_lit(c.get("value")))])
+            w.block(S, [("ex:hasBaselineDenominator", D)])
+    for m_i, ms in enumerate(bl.get("measures") or []):
+        M = iri.bl_measure(nct, m_i)
+        w.block(M, [("a", "ex:BaselineMeasure"), ("rdfs:label", text_lit(ms.get("title"))),
+                    ("ex:title", text_lit(ms.get("title"))),
+                    ("ex:description", text_lit(ms.get("description"))),
+                    ("ex:populationDescription", text_lit(ms.get("populationDescription"))),
+                    ("ex:paramType", lit(ms.get("paramType"))),
+                    ("ex:dispersionType", lit(ms.get("dispersionType"))),
+                    ("ex:unitOfMeasure", text_lit(ms.get("unitOfMeasure"))),
+                    ("ex:calculatePercent", bool_lit(ms.get("calculatePct"))),
+                    ("ex:denomUnitsSelected", lit(ms.get("denomUnitsSelected")))])
+        w.block(S, [("ex:hasBaselineMeasure", M)])
+        k = 0
+        for cls in ms.get("classes") or []:
+            for cat in cls.get("categories") or []:
+                for x in cat.get("measurements") or []:
+                    gid = (x.get("groupId") or "").strip()
+                    X = iri.bl_measurement(nct, m_i, k)
+                    k += 1
+                    w.block(X, [("a", "ex:BaselineMeasurement"),
+                                ("ex:group", groups.get(gid)), ("ex:groupId", lit(gid)),
+                                ("ex:classTitle", text_lit(cls.get("title"))),
+                                ("ex:categoryTitle", text_lit(cat.get("title"))),
+                                ("ex:valueText", lit(x.get("value"))),
+                                ("ex:value", float_lit(x.get("value"))),
+                                ("ex:spread", float_lit(x.get("spread"))),
+                                ("ex:lowerLimit", float_lit(x.get("lowerLimit"))),
+                                ("ex:upperLimit", float_lit(x.get("upperLimit"))),
+                                ("ex:comment", text_lit(x.get("comment")))])
+                    w.block(M, [("ex:hasMeasurement", X)])
+
+
+def _documents(w, nct, S, ld):
+    """Protocol, statistical analysis plan and consent form PDFs. The URL follows
+    ClinicalTrials.gov's large-document pattern and is labelled as derived."""
+    if ld.get("noSap") is not None:
+        w.block(S, [("ex:noStatisticalAnalysisPlan", bool_lit(ld.get("noSap")))])
+    for i, d in enumerate(ld.get("largeDocs") or []):
+        fn = (d.get("filename") or "").strip()
+        X = iri.document(nct, i)
+        url = f"https://cdn.clinicaltrials.gov/large-docs/{nct[-2:]}/{nct}/{fn}" if fn else None
+        w.block(X, [("a", "ex:StudyDocument"), ("rdfs:label", text_lit(d.get("label") or fn)),
+                    ("ex:documentType", lit(d.get("typeAbbrev"))),
+                    ("ex:hasProtocol", bool_lit(d.get("hasProtocol"))),
+                    ("ex:hasSap", bool_lit(d.get("hasSap"))),
+                    ("ex:hasIcf", bool_lit(d.get("hasIcf"))),
+                    ("ex:documentDate", date_lit(d.get("date"))),
+                    ("ex:uploadDate", date_lit((d.get("uploadDate") or "")[:10] or None)),
+                    ("ex:filename", lit(fn)), ("ex:sizeBytes", int_lit(d.get("size"))),
+                    ("ex:derivedUrl", lit(url))])
+        w.block(S, [("ex:hasDocument", X)])
+
+
+def _annotations(w, nct, S, an):
+    """Unposted-results events and FDAAA 801 violation events NLM attaches to a record."""
+    up = an.get("unpostedAnnotation") or {}
+    if up.get("unpostedResponsibleParty"):
+        w.block(S, [("ex:unpostedResponsibleParty", text_lit(up.get("unpostedResponsibleParty")))])
+    for i, ev in enumerate(up.get("unpostedEvents") or []):
+        X = iri.annotation(nct, "unposted", i)
+        w.block(X, [("a", "ex:UnpostedResultsEvent"), ("ex:eventType", lit(ev.get("type"))),
+                    ("ex:eventDate", date_lit(ev.get("date"))),
+                    ("ex:dateUnknown", bool_lit(ev.get("dateUnknown")))])
+        w.block(S, [("ex:hasUnpostedEvent", X)])
+    for i, ev in enumerate(_g(an, "violationAnnotation", "violationEvents") or []):
+        X = iri.annotation(nct, "violation", i)
+        w.block(X, [("a", "ex:ViolationEvent"), ("ex:eventType", lit(ev.get("type"))),
+                    ("ex:description", text_lit(ev.get("description"))),
+                    ("ex:creationDate", date_lit(ev.get("creationDate"))),
+                    ("ex:issuedDate", date_lit(ev.get("issuedDate"))),
+                    ("ex:releaseDate", date_lit(ev.get("releaseDate"))),
+                    ("ex:postedDate", date_lit(ev.get("postedDate")))])
+        w.block(S, [("ex:hasViolationEvent", X)])
+
+
+
+def _submissions(w, nct, S, infos):
+    """Results submission and quality-control cycles (release, unrelease, reset)."""
+    for i, si in enumerate(infos):
+        X = iri.annotation(nct, "submission", i)
+        w.block(X, [("a", "ex:ResultsSubmissionCycle"),
+                    ("ex:releaseDate", date_lit(si.get("releaseDate"))),
+                    ("ex:unreleaseDate", date_lit(si.get("unreleaseDate"))),
+                    ("ex:unreleaseDateUnknown", bool_lit(si.get("unreleaseDateUnknown"))),
+                    ("ex:resetDate", date_lit(si.get("resetDate"))),
+                    ("ex:qcReviewRound", int_lit(si.get("mcpReleaseN")))])
+        w.block(S, [("ex:hasResultsSubmissionCycle", X)])
 
 # ---------------------------------------------------------------------------
 def _open_json(path):

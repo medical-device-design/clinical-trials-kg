@@ -88,3 +88,32 @@ sh_:FdaLink a sh:NodeShape ;
     sh:property [ sh:path ex:submissionNumber ; sh:minCount 1 ; sh:maxCount 1 ] ;
     sh:property [ sh:path ex:linkMethod ; sh:minCount 1 ] ;
     sh:property [ sh:path ex:linkConfidence ; sh:minCount 1 ] .
+
+sh_:Flow a sh:NodeShape ;
+    sh:targetClass ex:FlowMilestone , ex:FlowWithdrawal ;
+    sh:property [ sh:path ex:group ; sh:maxCount 1 ; sh:class ex:FlowGroup ] ;
+    sh:property [ sh:path ex:numSubjects ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+sh_:FlowPeriod a sh:NodeShape ;
+    sh:targetClass ex:FlowPeriod ;
+    sh:property [ sh:path ex:hasMilestone ; sh:class ex:FlowMilestone ] ;
+    sh:property [ sh:path ex:hasWithdrawal ; sh:class ex:FlowWithdrawal ] .
+
+sh_:Baseline a sh:NodeShape ;
+    sh:targetClass ex:BaselineMeasurement , ex:BaselineDenominator ;
+    sh:property [ sh:path ex:group ; sh:maxCount 1 ; sh:class ex:BaselineGroup ] ;
+    sh:property [ sh:path ex:value ; sh:maxCount 1 ; sh:datatype xsd:decimal ] ;
+    sh:property [ sh:path ex:count ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+sh_:BaselineMeasure a sh:NodeShape ;
+    sh:targetClass ex:BaselineMeasure ;
+    sh:property [ sh:path ex:hasMeasurement ; sh:class ex:BaselineMeasurement ] .
+
+sh_:Document a sh:NodeShape ;
+    sh:targetClass ex:StudyDocument ;
+    sh:property [ sh:path ex:sizeBytes ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+sh_:Reference a sh:NodeShape ;
+    sh:targetClass ex:StudyReference ;
+    sh:property [ sh:path ex:publication ; sh:maxCount 1 ; sh:class ex:Publication ] ;
+    sh:property [ sh:path ex:retractionNotice ; sh:class ex:Publication ] .

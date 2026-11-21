@@ -11,7 +11,7 @@ DEVICE_WITH_RESULTS = {
     "hasResults": True,
     "protocolSection": {
         "identificationModule": {
-            "nctId": "NCT09000001",
+            "nctId": "NCT09000001", "nctIdAliases": ["NCT08999999"],
             "orgStudyIdInfo": {"id": "TEST-001"},
             "secondaryIdInfos": [
                 {"id": "G170123", "type": "FDA"},
@@ -82,9 +82,10 @@ DEVICE_WITH_RESULTS = {
             ],
         },
         "referencesModule": {"references": [
-            {"pmid": "31234567", "type": "RESULT", "citation": "Doe J. Alpha trial. J Wound. 2022."},
+            {"pmid": "31234567", "type": "RESULT", "citation": "Doe J. Alpha trial. J Wound. 2022.",
+             "retractions": [{"pmid": "39999999", "source": "J Wound. 2023"}]},
             {"type": "BACKGROUND", "citation": "Book chapter without PMID."},
-        ]},
+        ], "seeAlsoLinks": [{"label": "Sponsor page", "url": "https://testco.example.com/alpha"}]},
     },
     "resultsSection": {
         "outcomeMeasuresModule": {"outcomeMeasures": [{
@@ -117,10 +118,39 @@ DEVICE_WITH_RESULTS = {
             "otherEvents": [{"term": "Pruritus", "organSystem": "Skin",
                              "stats": [{"groupId": "EG000", "numAffected": 4, "numAtRisk": 60}]}],
         },
+        "participantFlowModule": {
+            "recruitmentDetails": "Recruited at one clinic.",
+            "groups": [{"id": "FG000", "title": "Alpha"}, {"id": "FG001", "title": "Sham"}],
+            "periods": [{"title": "Overall Study",
+                         "milestones": [{"type": "STARTED", "achievements": [
+                             {"groupId": "FG000", "numSubjects": "60"}, {"groupId": "FG001", "numSubjects": "60"}]},
+                                        {"type": "COMPLETED", "achievements": [
+                             {"groupId": "FG000", "numSubjects": "55"}, {"groupId": "FG001", "numSubjects": "57"}]}],
+                         "dropWithdraws": [{"type": "Lost to Follow-up", "reasons": [
+                             {"groupId": "FG000", "numSubjects": "5"}, {"groupId": "FG001", "numSubjects": "3"}]}]}],
+        },
+        "baselineCharacteristicsModule": {
+            "groups": [{"id": "BG000", "title": "Alpha"}, {"id": "BG001", "title": "Total"}],
+            "denoms": [{"units": "Participants", "counts": [{"groupId": "BG000", "value": "60"},
+                                                            {"groupId": "BG001", "value": "120"}]}],
+            "measures": [{"title": "Age, Continuous", "paramType": "MEAN", "dispersionType": "STANDARD_DEVIATION",
+                          "unitOfMeasure": "years", "classes": [{"categories": [{"measurements": [
+                              {"groupId": "BG000", "value": "61.2", "spread": "9.1"},
+                              {"groupId": "BG001", "value": "60.8", "spread": "9.4"}]}]}]}],
+        },
         "moreInfoModule": {"pointOfContact": {"title": "Dr. Contact", "organization": "Testco Medical",
                                               "email": "poc@testco.example.com", "phone": "555-0199"}},
     },
+    "documentSection": {"largeDocumentModule": {"largeDocs": [
+        {"typeAbbrev": "Prot_SAP", "hasProtocol": True, "hasSap": True, "hasIcf": False,
+         "label": "Study Protocol and Statistical Analysis Plan", "date": "2019-01-10",
+         "uploadDate": "2021-07-01T12:54", "filename": "Prot_SAP_000.pdf", "size": 989192}]}},
+    "annotationSection": {"annotationModule": {"unpostedAnnotation": {
+        "unpostedResponsibleParty": "Testco Medical",
+        "unpostedEvents": [{"type": "RESET", "date": "2022-01-05"}]}}},
     "derivedSection": {
+        "miscInfoModule": {"versionHolder": "2026-11-20",
+                           "submissionTracking": {"submissionInfos": [{"releaseDate": "2021-07-01", "resetDate": "2021-08-01", "mcpReleaseN": 1}]}},
         "conditionBrowseModule": {"meshes": [{"id": "D017719", "term": "Diabetic Foot"}]},
         "interventionBrowseModule": {"meshes": []},
     },
