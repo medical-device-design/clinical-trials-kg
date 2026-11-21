@@ -34,6 +34,10 @@ SCOPE=device bash scripts/run_pilot.sh         # pilot, about 76,000 studies
 SCOPE=all TAG=full-$(date +%F) bash scripts/run_pilot.sh   # full load
 ```
 
+## Local query endpoint (VM .83)
+
+The device-study build (77,301 studies, 28.3 M triples) is loaded in TDB2 at `/srv/clinical-trials-kg/tdb2/device-2026-11-20` and served read-only by Fuseki on `http://localhost:3032/clinical-trials/sparql` (localhost only). Reach it from a PC with `ssh -L 3032:localhost:3032 <user>@10.22.12.83` over the Hofstra VPN. The full build (343 M triples) is not loaded, to spare the shared disk.
+
 ## Output
 
 Per page of up to 1,000 studies:
