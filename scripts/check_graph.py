@@ -46,26 +46,35 @@ def triples(path):
 
 
 def main(argv):
+    """Orphans are checked per page group (page_N.ttl plus page_N.*.ttl), which is
+    exact because every page file describes its own shared nodes. This keeps
+    memory at one page instead of the whole graph."""
     out_dir = argv[0]
     stats_path = argv[2] if len(argv) > 2 and argv[1] == "--json" else None
-    typed, referenced = set(), set()
-    classes, n, emails, forbidden = Counter(), 0, [], []
+    classes, n, emails, forbidden, orphans = Counter(), 0, [], [], []
     files = sorted(f for f in os.listdir(out_dir) if f.endswith(".ttl"))
+    groups = {}
     for f in files:
-        for s, p, o in triples(os.path.join(out_dir, f)):
-            n += 1
-            if p == RDF_TYPE:
-                typed.add(s)
-                classes[o.strip("<>")] += 1
-            elif o.startswith("<") and o[1:].startswith(ID):
-                referenced.add(o.strip("<>"))
-            if o.startswith('"') and EMAIL.search(o):
-                emails.append((s, p))
-            if any(k in p for k in FORBIDDEN):
-                forbidden.append((s, p))
-    orphans = sorted(referenced - typed)
+        groups.setdefault(f.split(".")[0], []).append(f)
+    typed_total = 0
+    for key in sorted(groups):
+        typed, referenced = set(), set()
+        for f in groups[key]:
+            for s, p, o in triples(os.path.join(out_dir, f)):
+                n += 1
+                if p == RDF_TYPE:
+                    typed.add(s)
+                    classes[o.strip("<>")] += 1
+                elif o.startswith("<") and o[1:].startswith(ID):
+                    referenced.add(o.strip("<>"))
+                if o.startswith('"') and EMAIL.search(o):
+                    emails.append((s, p))
+                if any(k in p for k in FORBIDDEN):
+                    forbidden.append((s, p))
+        typed_total += len(typed)
+        orphans.extend(sorted(referenced - typed))
     report = {
-        "files": len(files), "triples": n, "typed_instances": len(typed),
+        "files": len(files), "triples": n, "typed_instances": typed_total,
         "orphans": len(orphans), "orphan_examples": orphans[:10],
         "email_literals": len(emails), "email_examples": emails[:5],
         "forbidden_predicates": len(forbidden),
