@@ -1,0 +1,2791 @@
+{
+ "files": 1839,
+ "classes": [
+  "ex:AdverseEvent",
+  "ex:AdverseEventGroup",
+  "ex:AdverseEventReport",
+  "ex:AdverseEventStatistic",
+  "ex:ArmGroup",
+  "ex:AvailableIpd",
+  "ex:BaselineDenominator",
+  "ex:BaselineGroup",
+  "ex:BaselineMeasure",
+  "ex:BaselineMeasurement",
+  "ex:ClinicalStudy",
+  "ex:Condition",
+  "ex:Country",
+  "ex:DenominatorCount",
+  "ex:FdaSubmissionLink",
+  "ex:FlowGroup",
+  "ex:FlowMilestone",
+  "ex:FlowPeriod",
+  "ex:FlowWithdrawal",
+  "ex:Intervention",
+  "ex:MeSHConcept",
+  "ex:Organization",
+  "ex:OutcomeGroup",
+  "ex:OutcomeMeasure",
+  "ex:OutcomeMeasurement",
+  "ex:Person",
+  "ex:PlannedOutcome",
+  "ex:Publication",
+  "ex:ResultsSubmissionCycle",
+  "ex:SecondaryIdentifier",
+  "ex:SeeAlsoLink",
+  "ex:StatisticalAnalysis",
+  "ex:StudyDocument",
+  "ex:StudyOfficial",
+  "ex:StudyReference",
+  "ex:StudySite",
+  "ex:UnpostedResultsEvent",
+  "ex:ViolationEvent"
+ ],
+ "predicates": {
+  "ex:acronym": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:affiliation": {
+   "domain": [
+    "ex:Person"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:allCauseMortalityComment": {
+   "domain": [
+    "ex:AdverseEventReport"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:allocation": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:anticipatedPostingDate": {
+   "domain": [
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:gYear",
+    "xsd:gYearMonth"
+   ],
+   "iri_targets": []
+  },
+  "ex:armType": {
+   "domain": [
+    "ex:ArmGroup"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:assessmentType": {
+   "domain": [
+    "ex:AdverseEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:baselinePopulationDescription": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:baselineTypeUnitsAnalyzed": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:bioSpecDescription": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:bioSpecRetention": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:briefSummary": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:briefTitle": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:calculatePercent": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:categoryTitle": {
+   "domain": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ciLowerLimit": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:ciLowerLimitComment": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ciNumSides": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ciPercent": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:ciUpperLimit": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:ciUpperLimitComment": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:citation": {
+   "domain": [
+    "ex:StudyReference"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:city": {
+   "domain": [
+    "ex:StudySite"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:classTitle": {
+   "domain": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:collaborator": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 363302,
+   "lit": [],
+   "iri_targets": [
+    "ex:Organization"
+   ]
+  },
+  "ex:comment": {
+   "domain": [
+    "ex:AvailableIpd",
+    "ex:BaselineMeasurement",
+    "ex:FlowMilestone",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:comparesGroup": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 640522,
+   "lit": [],
+   "iri_targets": [
+    "ex:OutcomeGroup"
+   ]
+  },
+  "ex:completionDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date",
+    "xsd:gYearMonth"
+   ],
+   "iri_targets": []
+  },
+  "ex:completionDateType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:conditionMesh": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 853199,
+   "lit": [],
+   "iri_targets": [
+    "ex:MeSHConcept"
+   ]
+  },
+  "ex:count": {
+   "domain": [
+    "ex:BaselineDenominator",
+    "ex:DenominatorCount"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:country": {
+   "domain": [
+    "ex:StudySite"
+   ],
+   "iri": 3566817,
+   "lit": [],
+   "iri_targets": [
+    "ex:Country"
+   ]
+  },
+  "ex:creationDate": {
+   "domain": [
+    "ex:ViolationEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:dateUnknown": {
+   "domain": [
+    "ex:UnpostedResultsEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:deathsNumAffected": {
+   "domain": [
+    "ex:AdverseEventGroup"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:deathsNumAtRisk": {
+   "domain": [
+    "ex:AdverseEventGroup"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:denomUnitsSelected": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:derivedUrl": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:description": {
+   "domain": [
+    "ex:AdverseEventGroup",
+    "ex:AdverseEventReport",
+    "ex:ArmGroup",
+    "ex:BaselineGroup",
+    "ex:BaselineMeasure",
+    "ex:FlowGroup",
+    "ex:Intervention",
+    "ex:OutcomeGroup",
+    "ex:OutcomeMeasure",
+    "ex:PlannedOutcome",
+    "ex:ViolationEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:detailedDescription": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:dispersionType": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure",
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:dispersionValue": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:dispositionFirstSubmitDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:dispositionFirstSubmitQcDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:documentDate": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:documentType": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:eligibilityCriteria": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:enrollment": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:enrollmentType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:estimateComment": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:estimatedResultsFirstSubmitDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:eventDate": {
+   "domain": [
+    "ex:UnpostedResultsEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:eventType": {
+   "domain": [
+    "ex:UnpostedResultsEvent",
+    "ex:ViolationEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:expandedAccessNctId": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:expandedAccessStatus": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:expandedAccessType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:facility": {
+   "domain": [
+    "ex:StudySite"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:fdaaa801Violation": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:filename": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:firstPostDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:firstPostDateType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:firstQcReleaseDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:flowTypeUnitsAnalyzed": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:frequencyThreshold": {
+   "domain": [
+    "ex:AdverseEventReport"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:fromSecondaryId": {
+   "domain": [
+    "ex:FdaSubmissionLink"
+   ],
+   "iri": 168,
+   "lit": [],
+   "iri_targets": [
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00003717/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00028964/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00028977/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00029029/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00056628/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00160732/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00187148/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00197054/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00218465/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00228293/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00262041/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00267371/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00313235/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00313339/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00316004/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00316017/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00383305/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00409344/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00414284/secondary-id/",
+    "<https://bmedesign.org/clinical-trials-kg/id/study/NCT00414700/secondary-id/"
+   ]
+  },
+  "ex:fundedByNihProject": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 36394,
+   "lit": [],
+   "iri_targets": [
+    "<https://bmedesign.org/core/id/nih-project/"
+   ]
+  },
+  "ex:genderBased": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:genderDescription": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:group": {
+   "domain": [
+    "ex:AdverseEventStatistic",
+    "ex:BaselineDenominator",
+    "ex:BaselineMeasurement",
+    "ex:DenominatorCount",
+    "ex:FlowMilestone",
+    "ex:FlowWithdrawal",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 23759700,
+   "lit": [],
+   "iri_targets": [
+    "ex:AdverseEventGroup",
+    "ex:BaselineGroup",
+    "ex:FlowGroup",
+    "ex:OutcomeGroup"
+   ]
+  },
+  "ex:groupDescription": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:groupId": {
+   "domain": [
+    "ex:AdverseEventGroup",
+    "ex:AdverseEventStatistic",
+    "ex:BaselineDenominator",
+    "ex:BaselineGroup",
+    "ex:BaselineMeasurement",
+    "ex:DenominatorCount",
+    "ex:FlowGroup",
+    "ex:FlowMilestone",
+    "ex:FlowWithdrawal",
+    "ex:OutcomeGroup",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:hasAdverseEventReport": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 80932,
+   "lit": [],
+   "iri_targets": [
+    "ex:AdverseEventReport"
+   ]
+  },
+  "ex:hasAnalysis": {
+   "domain": [
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 330958,
+   "lit": [],
+   "iri_targets": [
+    "ex:StatisticalAnalysis"
+   ]
+  },
+  "ex:hasArm": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 1129248,
+   "lit": [],
+   "iri_targets": [
+    "ex:ArmGroup"
+   ]
+  },
+  "ex:hasAvailableIpd": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 10884,
+   "lit": [],
+   "iri_targets": [
+    "ex:AvailableIpd"
+   ]
+  },
+  "ex:hasBaselineDenominator": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 243980,
+   "lit": [],
+   "iri_targets": [
+    "ex:BaselineDenominator"
+   ]
+  },
+  "ex:hasBaselineGroup": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 242486,
+   "lit": [],
+   "iri_targets": [
+    "ex:BaselineGroup"
+   ]
+  },
+  "ex:hasBaselineMeasure": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 415932,
+   "lit": [],
+   "iri_targets": [
+    "ex:BaselineMeasure"
+   ]
+  },
+  "ex:hasCondition": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 1104925,
+   "lit": [],
+   "iri_targets": [
+    "ex:Condition"
+   ]
+  },
+  "ex:hasDataMonitoringCommittee": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:hasDenominator": {
+   "domain": [
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 1634445,
+   "lit": [],
+   "iri_targets": [
+    "ex:DenominatorCount"
+   ]
+  },
+  "ex:hasDocument": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 88476,
+   "lit": [],
+   "iri_targets": [
+    "ex:StudyDocument"
+   ]
+  },
+  "ex:hasEvent": {
+   "domain": [
+    "ex:AdverseEventReport"
+   ],
+   "iri": 3448399,
+   "lit": [],
+   "iri_targets": [
+    "ex:AdverseEvent"
+   ]
+  },
+  "ex:hasExpandedAccess": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:hasFlowGroup": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 198776,
+   "lit": [],
+   "iri_targets": [
+    "ex:FlowGroup"
+   ]
+  },
+  "ex:hasFlowPeriod": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 101631,
+   "lit": [],
+   "iri_targets": [
+    "ex:FlowPeriod"
+   ]
+  },
+  "ex:hasGroup": {
+   "domain": [
+    "ex:AdverseEventReport",
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 1811300,
+   "lit": [],
+   "iri_targets": [
+    "ex:AdverseEventGroup",
+    "ex:OutcomeGroup"
+   ]
+  },
+  "ex:hasIcf": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:hasIntervention": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 1037062,
+   "lit": [],
+   "iri_targets": [
+    "ex:Intervention"
+   ]
+  },
+  "ex:hasMeasurement": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 8087868,
+   "lit": [],
+   "iri_targets": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ]
+  },
+  "ex:hasMilestone": {
+   "domain": [
+    "ex:FlowPeriod"
+   ],
+   "iri": 912461,
+   "lit": [],
+   "iri_targets": [
+    "ex:FlowMilestone"
+   ]
+  },
+  "ex:hasOfficial": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 539562,
+   "lit": [],
+   "iri_targets": [
+    "ex:StudyOfficial"
+   ]
+  },
+  "ex:hasOtherOutcome": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 215813,
+   "lit": [],
+   "iri_targets": [
+    "ex:PlannedOutcome"
+   ]
+  },
+  "ex:hasOutcomeMeasure": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 676629,
+   "lit": [],
+   "iri_targets": [
+    "ex:OutcomeMeasure"
+   ]
+  },
+  "ex:hasPrimaryOutcome": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 1208254,
+   "lit": [],
+   "iri_targets": [
+    "ex:PlannedOutcome"
+   ]
+  },
+  "ex:hasProtocol": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:hasReference": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 1160606,
+   "lit": [],
+   "iri_targets": [
+    "ex:StudyReference"
+   ]
+  },
+  "ex:hasResults": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:hasResultsSubmissionCycle": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 21993,
+   "lit": [],
+   "iri_targets": [
+    "ex:ResultsSubmissionCycle"
+   ]
+  },
+  "ex:hasSap": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:hasSecondaryId": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 179124,
+   "lit": [],
+   "iri_targets": [
+    "ex:SecondaryIdentifier"
+   ]
+  },
+  "ex:hasSecondaryOutcome": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 2420658,
+   "lit": [],
+   "iri_targets": [
+    "ex:PlannedOutcome"
+   ]
+  },
+  "ex:hasSeeAlsoLink": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 78440,
+   "lit": [],
+   "iri_targets": [
+    "ex:SeeAlsoLink"
+   ]
+  },
+  "ex:hasSite": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 3566927,
+   "lit": [],
+   "iri_targets": [
+    "ex:StudySite"
+   ]
+  },
+  "ex:hasStatistic": {
+   "domain": [
+    "ex:AdverseEvent"
+   ],
+   "iri": 12270264,
+   "lit": [],
+   "iri_targets": [
+    "ex:AdverseEventStatistic"
+   ]
+  },
+  "ex:hasUnpostedEvent": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 34158,
+   "lit": [],
+   "iri_targets": [
+    "ex:UnpostedResultsEvent"
+   ]
+  },
+  "ex:hasViolationEvent": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 18,
+   "lit": [],
+   "iri_targets": [
+    "ex:ViolationEvent"
+   ]
+  },
+  "ex:hasWithdrawal": {
+   "domain": [
+    "ex:FlowPeriod"
+   ],
+   "iri": 610682,
+   "lit": [],
+   "iri_targets": [
+    "ex:FlowWithdrawal"
+   ]
+  },
+  "ex:healthyVolunteers": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:identifierDomain": {
+   "domain": [
+    "ex:SecondaryIdentifier"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:identifierLink": {
+   "domain": [
+    "ex:SecondaryIdentifier"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:identifierType": {
+   "domain": [
+    "ex:SecondaryIdentifier"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:identifierValue": {
+   "domain": [
+    "ex:SecondaryIdentifier"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:inArm": {
+   "domain": [
+    "ex:Intervention"
+   ],
+   "iri": 2732227,
+   "lit": [],
+   "iri_targets": [
+    "ex:ArmGroup"
+   ]
+  },
+  "ex:interventionMesh": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 478637,
+   "lit": [],
+   "iri_targets": [
+    "ex:MeSHConcept"
+   ]
+  },
+  "ex:interventionModel": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:interventionModelDescription": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:interventionName": {
+   "domain": [
+    "ex:Intervention"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:interventionType": {
+   "domain": [
+    "ex:Intervention"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdAccessCriteria": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdId": {
+   "domain": [
+    "ex:AvailableIpd"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdInfoType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdSharing": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdSharingDescription": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdTimeFrame": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdType": {
+   "domain": [
+    "ex:AvailableIpd"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:ipdUrl": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:isFdaRegulatedDevice": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:isFdaRegulatedDrug": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:isPediatricPostmarketSurveillance": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:isRetracted": {
+   "domain": [
+    "ex:StudyReference"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:isUnapprovedDevice": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:isUsExport": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:issuedDate": {
+   "domain": [
+    "ex:ViolationEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:keyword": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:lastKnownStatus": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:lastUpdatePostDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:lastUpdatePostDateType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:lastUpdateSubmitDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:leadSponsor": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 612892,
+   "lit": [],
+   "iri_targets": [
+    "ex:Organization"
+   ]
+  },
+  "ex:limitationsAndCaveats": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:linkConfidence": {
+   "domain": [
+    "ex:FdaSubmissionLink"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:linkMethod": {
+   "domain": [
+    "ex:FdaSubmissionLink"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:lowerLimit": {
+   "domain": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:maskedRole": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:masking": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:maskingDescription": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:maximumAge": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:meshId": {
+   "domain": [
+    "ex:MeSHConcept"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:milestoneType": {
+   "domain": [
+    "ex:FlowMilestone"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:minimumAge": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:nctId": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:nctIdAlias": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:nihCoreProjectNumber": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:noStatisticalAnalysisPlan": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:nonInferiorityComment": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:nonInferiorityType": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:normalizedName": {
+   "domain": [
+    "ex:Organization"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:notes": {
+   "domain": [
+    "ex:AdverseEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:numAffected": {
+   "domain": [
+    "ex:AdverseEventStatistic"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:numAtRisk": {
+   "domain": [
+    "ex:AdverseEventStatistic"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:numEvents": {
+   "domain": [
+    "ex:AdverseEventStatistic"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:numSubjects": {
+   "domain": [
+    "ex:FlowMilestone",
+    "ex:FlowWithdrawal"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:numUnits": {
+   "domain": [
+    "ex:FlowMilestone"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:observationalModel": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:officialRole": {
+   "domain": [
+    "ex:StudyOfficial"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:officialTitle": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:orgStudyId": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:orgStudyIdLink": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:orgStudyIdType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:organSystem": {
+   "domain": [
+    "ex:AdverseEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:organizationClass": {
+   "domain": [
+    "ex:Organization"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:otherAnalysisDescription": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:otherName": {
+   "domain": [
+    "ex:Intervention"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:otherNumAffected": {
+   "domain": [
+    "ex:AdverseEventGroup"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:otherNumAtRisk": {
+   "domain": [
+    "ex:AdverseEventGroup"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:outcomeType": {
+   "domain": [
+    "ex:OutcomeMeasure",
+    "ex:PlannedOutcome"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:overallStatus": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:pValue": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:pValueComment": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:pValueText": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:paramType": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure",
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:paramValue": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:patientRegistry": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:person": {
+   "domain": [
+    "ex:StudyOfficial"
+   ],
+   "iri": 539562,
+   "lit": [],
+   "iri_targets": [
+    "ex:Person"
+   ]
+  },
+  "ex:phase": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:piSponsorEmployee": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:pmid": {
+   "domain": [
+    "ex:Publication"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:populationDescription": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:postalCode": {
+   "domain": [
+    "ex:StudySite"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:postedDate": {
+   "domain": [
+    "ex:ViolationEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:preAssignmentDetails": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:primaryCompletionDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date",
+    "xsd:gYearMonth"
+   ],
+   "iri_targets": []
+  },
+  "ex:primaryCompletionDateType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:primaryPurpose": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:publication": {
+   "domain": [
+    "ex:StudyReference"
+   ],
+   "iri": 1101380,
+   "lit": [],
+   "iri_targets": [
+    "ex:Publication"
+   ]
+  },
+  "ex:qcReviewRound": {
+   "domain": [
+    "ex:ResultsSubmissionCycle"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:recruitmentDetails": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:recruitmentStatus": {
+   "domain": [
+    "ex:StudySite"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:referenceType": {
+   "domain": [
+    "ex:StudyReference"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:releaseDate": {
+   "domain": [
+    "ex:ResultsSubmissionCycle",
+    "ex:ViolationEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:removedCountry": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:reportingStatus": {
+   "domain": [
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:resetDate": {
+   "domain": [
+    "ex:ResultsSubmissionCycle"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:responsibleInvestigator": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 257612,
+   "lit": [],
+   "iri_targets": [
+    "ex:Person"
+   ]
+  },
+  "ex:responsibleInvestigatorTitle": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:responsiblePartyOldNameTitle": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:responsiblePartyOldOrganization": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:responsiblePartyType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:restrictionDetails": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:restrictionType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:restrictiveAgreement": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:resultsFirstPostDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:resultsFirstPostDateType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:resultsFirstSubmitDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:resultsFirstSubmitQcDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:resultsPointOfContactOrganization": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:retractionNotice": {
+   "domain": [
+    "ex:StudyReference"
+   ],
+   "iri": 335,
+   "lit": [],
+   "iri_targets": [
+    "ex:Publication"
+   ]
+  },
+  "ex:retractionSource": {
+   "domain": [
+    "ex:StudyReference"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:retrievedAt": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:samplingMethod": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:seriousNumAffected": {
+   "domain": [
+    "ex:AdverseEventGroup"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:seriousNumAtRisk": {
+   "domain": [
+    "ex:AdverseEventGroup"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:seriousness": {
+   "domain": [
+    "ex:AdverseEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:sex": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:sizeBytes": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:integer"
+   ],
+   "iri_targets": []
+  },
+  "ex:sourceDataset": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:sourceRecordId": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:sourceUrl": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:sourceVersionDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:sourceVocabulary": {
+   "domain": [
+    "ex:AdverseEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:spread": {
+   "domain": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:startDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date",
+    "xsd:gYearMonth"
+   ],
+   "iri_targets": []
+  },
+  "ex:startDateType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:state": {
+   "domain": [
+    "ex:StudySite"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:statisticalComment": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:statisticalMethod": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:statusVerifiedDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date",
+    "xsd:gYearMonth"
+   ],
+   "iri_targets": []
+  },
+  "ex:stdAge": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:study": {
+   "domain": [
+    "ex:FdaSubmissionLink"
+   ],
+   "iri": 168,
+   "lit": [],
+   "iri_targets": [
+    "ex:ClinicalStudy"
+   ]
+  },
+  "ex:studyFirstSubmitDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:studyFirstSubmitQcDate": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:studyPopulation": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:studyType": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:submissionNumber": {
+   "domain": [
+    "ex:FdaSubmissionLink"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:submissionType": {
+   "domain": [
+    "ex:FdaSubmissionLink"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:submittingOrganization": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 612892,
+   "lit": [],
+   "iri_targets": [
+    "ex:Organization"
+   ]
+  },
+  "ex:targetDuration": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:term": {
+   "domain": [
+    "ex:AdverseEvent"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:testedNonInferiority": {
+   "domain": [
+    "ex:StatisticalAnalysis"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:timeFrame": {
+   "domain": [
+    "ex:AdverseEventReport",
+    "ex:OutcomeMeasure",
+    "ex:PlannedOutcome"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:timePerspective": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:title": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:typeUnitsAnalyzed": {
+   "domain": [
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:unitOfMeasure": {
+   "domain": [
+    "ex:BaselineMeasure",
+    "ex:OutcomeMeasure"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:units": {
+   "domain": [
+    "ex:BaselineDenominator",
+    "ex:DenominatorCount"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:unpostedResponsibleParty": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:unreleaseDate": {
+   "domain": [
+    "ex:ResultsSubmissionCycle"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:unreleaseDateUnknown": {
+   "domain": [
+    "ex:ResultsSubmissionCycle"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:boolean"
+   ],
+   "iri_targets": []
+  },
+  "ex:uploadDate": {
+   "domain": [
+    "ex:StudyDocument"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:date"
+   ],
+   "iri_targets": []
+  },
+  "ex:upperLimit": {
+   "domain": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:url": {
+   "domain": [
+    "ex:AvailableIpd",
+    "ex:SeeAlsoLink"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:value": {
+   "domain": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:decimal"
+   ],
+   "iri_targets": []
+  },
+  "ex:valueText": {
+   "domain": [
+    "ex:BaselineMeasurement",
+    "ex:OutcomeMeasurement"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:whyStopped": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  },
+  "ex:withdrawalReason": {
+   "domain": [
+    "ex:FlowWithdrawal"
+   ],
+   "iri": 0,
+   "lit": [
+    "xsd:string"
+   ],
+   "iri_targets": []
+  }
+ },
+ "note": "full build 2026-11-21, devicematch terms removed (not published), 2 code-only text fields added"
+}

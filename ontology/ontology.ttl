@@ -1,0 +1,1115 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <https://bmedesign.org/clinical-trials-kg/ns/> .
+
+<https://bmedesign.org/clinical-trials-kg/ns/> a owl:Ontology ;
+    dcterms:title "ClinicalTrials.gov Knowledge Graph vocabulary" ;
+    dcterms:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+    owl:versionInfo "v0.0.1" ;
+    rdfs:comment "Local terms of clinical-trials-kg. Shared identifiers and provenance map to the BMEdesign core vocabulary (https://bmedesign.org/core/ns/) through bmedesign-kg mappings/clinical-trials-kg.sssom.tsv." .
+
+# ---------------- classes ----------------
+ex:AdverseEvent a owl:Class ; rdfs:label "adverse event" .
+ex:AdverseEventGroup a owl:Class ; rdfs:label "adverse event group" .
+ex:AdverseEventReport a owl:Class ; rdfs:label "adverse event report" .
+ex:AdverseEventStatistic a owl:Class ; rdfs:label "adverse event statistic" .
+ex:ArmGroup a owl:Class ; rdfs:label "arm group" .
+ex:AvailableIpd a owl:Class ; rdfs:label "available IPD" .
+ex:BaselineDenominator a owl:Class ; rdfs:label "baseline denominator" .
+ex:BaselineGroup a owl:Class ; rdfs:label "baseline group" .
+ex:BaselineMeasure a owl:Class ; rdfs:label "baseline measure" .
+ex:BaselineMeasurement a owl:Class ; rdfs:label "baseline measurement" .
+ex:ClinicalStudy a owl:Class ; rdfs:label "clinical study" .
+ex:Condition a owl:Class ; rdfs:label "condition" .
+ex:Country a owl:Class ; rdfs:label "country" .
+ex:DenominatorCount a owl:Class ; rdfs:label "denominator count" .
+ex:FdaSubmissionLink a owl:Class ; rdfs:label "FDA submission link" .
+ex:FlowGroup a owl:Class ; rdfs:label "flow group" .
+ex:FlowMilestone a owl:Class ; rdfs:label "flow milestone" .
+ex:FlowPeriod a owl:Class ; rdfs:label "flow period" .
+ex:FlowWithdrawal a owl:Class ; rdfs:label "flow withdrawal" .
+ex:Intervention a owl:Class ; rdfs:label "intervention" .
+ex:MeSHConcept a owl:Class ; rdfs:label "MeSH concept" .
+ex:Organization a owl:Class ; rdfs:label "organization" .
+ex:OutcomeGroup a owl:Class ; rdfs:label "outcome group" .
+ex:OutcomeMeasure a owl:Class ; rdfs:label "outcome measure" .
+ex:OutcomeMeasurement a owl:Class ; rdfs:label "outcome measurement" .
+ex:Person a owl:Class ; rdfs:label "person" .
+ex:PlannedOutcome a owl:Class ; rdfs:label "planned outcome" .
+ex:Publication a owl:Class ; rdfs:label "publication" .
+ex:ResultsSubmissionCycle a owl:Class ; rdfs:label "results submission cycle" .
+ex:SecondaryIdentifier a owl:Class ; rdfs:label "secondary identifier" .
+ex:SeeAlsoLink a owl:Class ; rdfs:label "see also link" .
+ex:StatisticalAnalysis a owl:Class ; rdfs:label "statistical analysis" .
+ex:StudyDocument a owl:Class ; rdfs:label "study document" .
+ex:StudyOfficial a owl:Class ; rdfs:label "study official" .
+ex:StudyReference a owl:Class ; rdfs:label "study reference" .
+ex:StudySite a owl:Class ; rdfs:label "study site" .
+ex:UnpostedResultsEvent a owl:Class ; rdfs:label "unposted results event" .
+ex:ViolationEvent a owl:Class ; rdfs:label "violation event" .
+
+# ---------------- properties ----------------
+ex:acronym a owl:DatatypeProperty ;
+    rdfs:label "acronym" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:affiliation a owl:DatatypeProperty ;
+    rdfs:label "affiliation" ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:string .
+ex:allCauseMortalityComment a owl:DatatypeProperty ;
+    rdfs:label "all cause mortality comment" ;
+    rdfs:domain ex:AdverseEventReport ;
+    rdfs:range xsd:string .
+ex:allocation a owl:DatatypeProperty ;
+    rdfs:label "allocation" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:anticipatedPostingDate a owl:DatatypeProperty ;
+    rdfs:label "anticipated posting date" ;
+    rdfs:domain ex:OutcomeMeasure ;
+    rdfs:comment "values typed xsd:gYear, xsd:gYearMonth." .
+ex:armType a owl:DatatypeProperty ;
+    rdfs:label "arm type" ;
+    rdfs:domain ex:ArmGroup ;
+    rdfs:range xsd:string .
+ex:assessmentType a owl:DatatypeProperty ;
+    rdfs:label "assessment type" ;
+    rdfs:domain ex:AdverseEvent ;
+    rdfs:range xsd:string .
+ex:baselinePopulationDescription a owl:DatatypeProperty ;
+    rdfs:label "baseline population description" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:baselineTypeUnitsAnalyzed a owl:DatatypeProperty ;
+    rdfs:label "baseline type units analyzed" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:bioSpecDescription a owl:DatatypeProperty ;
+    rdfs:label "bio spec description" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:bioSpecRetention a owl:DatatypeProperty ;
+    rdfs:label "bio spec retention" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:briefSummary a owl:DatatypeProperty ;
+    rdfs:label "brief summary" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:briefTitle a owl:DatatypeProperty ;
+    rdfs:label "brief title" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:calculatePercent a owl:DatatypeProperty ;
+    rdfs:label "calculate percent" ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure." .
+ex:categoryTitle a owl:DatatypeProperty ;
+    rdfs:label "category title" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasurement, OutcomeMeasurement." .
+ex:ciLowerLimit a owl:DatatypeProperty ;
+    rdfs:label "CI lower limit" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:decimal .
+ex:ciLowerLimitComment a owl:DatatypeProperty ;
+    rdfs:label "CI lower limit comment" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:ciNumSides a owl:DatatypeProperty ;
+    rdfs:label "CI num sides" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:ciPercent a owl:DatatypeProperty ;
+    rdfs:label "CI percent" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:decimal .
+ex:ciUpperLimit a owl:DatatypeProperty ;
+    rdfs:label "CI upper limit" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:decimal .
+ex:ciUpperLimitComment a owl:DatatypeProperty ;
+    rdfs:label "CI upper limit comment" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:citation a owl:DatatypeProperty ;
+    rdfs:label "citation" ;
+    rdfs:domain ex:StudyReference ;
+    rdfs:range xsd:string .
+ex:city a owl:DatatypeProperty ;
+    rdfs:label "city" ;
+    rdfs:domain ex:StudySite ;
+    rdfs:range xsd:string .
+ex:classTitle a owl:DatatypeProperty ;
+    rdfs:label "class title" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasurement, OutcomeMeasurement." .
+ex:collaborator a owl:ObjectProperty ;
+    rdfs:label "collaborator" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:Organization .
+ex:comment a owl:DatatypeProperty ;
+    rdfs:label "comment" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on AvailableIpd, BaselineMeasurement, FlowMilestone, OutcomeMeasurement." .
+ex:comparesGroup a owl:ObjectProperty ;
+    rdfs:label "compares group" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range ex:OutcomeGroup .
+ex:completionDate a owl:DatatypeProperty ;
+    rdfs:label "completion date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:comment "values typed xsd:date, xsd:gYearMonth." .
+ex:completionDateType a owl:DatatypeProperty ;
+    rdfs:label "completion date type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:conditionMesh a owl:ObjectProperty ;
+    rdfs:label "condition MeSH" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:MeSHConcept .
+ex:count a owl:DatatypeProperty ;
+    rdfs:label "count" ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "used on BaselineDenominator, DenominatorCount." .
+ex:country a owl:ObjectProperty ;
+    rdfs:label "country" ;
+    rdfs:domain ex:StudySite ;
+    rdfs:range ex:Country .
+ex:creationDate a owl:DatatypeProperty ;
+    rdfs:label "creation date" ;
+    rdfs:domain ex:ViolationEvent ;
+    rdfs:range xsd:date .
+ex:dateUnknown a owl:DatatypeProperty ;
+    rdfs:label "date unknown" ;
+    rdfs:domain ex:UnpostedResultsEvent ;
+    rdfs:range xsd:boolean .
+ex:deathsNumAffected a owl:DatatypeProperty ;
+    rdfs:label "deaths num affected" ;
+    rdfs:domain ex:AdverseEventGroup ;
+    rdfs:range xsd:integer .
+ex:deathsNumAtRisk a owl:DatatypeProperty ;
+    rdfs:label "deaths num at risk" ;
+    rdfs:domain ex:AdverseEventGroup ;
+    rdfs:range xsd:integer .
+ex:denomUnitsSelected a owl:DatatypeProperty ;
+    rdfs:label "denom units selected" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure." .
+ex:derivedUrl a owl:DatatypeProperty ;
+    rdfs:label "derived URL" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:string .
+ex:description a owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on AdverseEventGroup, AdverseEventReport, ArmGroup, BaselineGroup, BaselineMeasure, FlowGroup, Intervention, OutcomeGroup, OutcomeMeasure, PlannedOutcome, ViolationEvent." .
+ex:detailedDescription a owl:DatatypeProperty ;
+    rdfs:label "detailed description" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:dispersionType a owl:DatatypeProperty ;
+    rdfs:label "dispersion type" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure, StatisticalAnalysis." .
+ex:dispersionValue a owl:DatatypeProperty ;
+    rdfs:label "dispersion value" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:decimal .
+ex:dispositionFirstSubmitDate a owl:DatatypeProperty ;
+    rdfs:label "disposition first submit date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:dispositionFirstSubmitQcDate a owl:DatatypeProperty ;
+    rdfs:label "disposition first submit QC date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:documentDate a owl:DatatypeProperty ;
+    rdfs:label "document date" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:date .
+ex:documentType a owl:DatatypeProperty ;
+    rdfs:label "document type" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:string .
+ex:eligibilityCriteria a owl:DatatypeProperty ;
+    rdfs:label "eligibility criteria" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:enrollment a owl:DatatypeProperty ;
+    rdfs:label "enrollment" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:integer .
+ex:enrollmentType a owl:DatatypeProperty ;
+    rdfs:label "enrollment type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:estimateComment a owl:DatatypeProperty ;
+    rdfs:label "estimate comment" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:estimatedResultsFirstSubmitDate a owl:DatatypeProperty ;
+    rdfs:label "estimated results first submit date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:eventDate a owl:DatatypeProperty ;
+    rdfs:label "event date" ;
+    rdfs:domain ex:UnpostedResultsEvent ;
+    rdfs:range xsd:date .
+ex:eventType a owl:DatatypeProperty ;
+    rdfs:label "event type" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on UnpostedResultsEvent, ViolationEvent." .
+ex:expandedAccessNctId a owl:DatatypeProperty ;
+    rdfs:label "expanded access NCT ID" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:expandedAccessStatus a owl:DatatypeProperty ;
+    rdfs:label "expanded access status" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:expandedAccessType a owl:DatatypeProperty ;
+    rdfs:label "expanded access type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:facility a owl:DatatypeProperty ;
+    rdfs:label "facility" ;
+    rdfs:domain ex:StudySite ;
+    rdfs:range xsd:string .
+ex:fdaaa801Violation a owl:DatatypeProperty ;
+    rdfs:label "FDAAA 801 violation" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:filename a owl:DatatypeProperty ;
+    rdfs:label "filename" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:string .
+ex:firstPostDate a owl:DatatypeProperty ;
+    rdfs:label "first post date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:firstPostDateType a owl:DatatypeProperty ;
+    rdfs:label "first post date type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:firstQcReleaseDate a owl:DatatypeProperty ;
+    rdfs:label "first QC release date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:flowTypeUnitsAnalyzed a owl:DatatypeProperty ;
+    rdfs:label "flow type units analyzed" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:frequencyThreshold a owl:DatatypeProperty ;
+    rdfs:label "frequency threshold" ;
+    rdfs:domain ex:AdverseEventReport ;
+    rdfs:range xsd:decimal .
+ex:fromSecondaryId a owl:ObjectProperty ;
+    rdfs:label "from secondary ID" ;
+    rdfs:domain ex:FdaSubmissionLink ;
+    rdfs:comment "points to https://bmedesign.org/clinical-trials-kg/id/study/NCT00003717/secondary-id/, https://bmedesign.org/clinical-trials-kg/id/study/NCT00028964/secondary-id/, https://bmedesign.org/clinical-trials-kg/id/study/NCT00028977/secondary-id/, https://bmedesign.org/clinical-trials-kg/id/study/NCT00029029/secondary-id/, https://bmedesign.org/clinical-trials-kg/id/study/NCT00056628/secondary-id/, https://bmedesign.org/clinical-trials-kg/id/study/NCT00160732/secondary-id/." .
+ex:fundedByNihProject a owl:ObjectProperty ;
+    rdfs:label "funded by NIH project" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:comment "points to https://bmedesign.org/core/id/nih-project/." .
+ex:genderBased a owl:DatatypeProperty ;
+    rdfs:label "gender based" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:genderDescription a owl:DatatypeProperty ;
+    rdfs:label "gender description" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:group a owl:ObjectProperty ;
+    rdfs:label "group" ;
+    rdfs:comment "used on AdverseEventStatistic, BaselineDenominator, BaselineMeasurement, DenominatorCount, FlowMilestone, FlowWithdrawal, OutcomeMeasurement. points to AdverseEventGroup, BaselineGroup, FlowGroup, OutcomeGroup." .
+ex:groupDescription a owl:DatatypeProperty ;
+    rdfs:label "group description" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:groupId a owl:DatatypeProperty ;
+    rdfs:label "group ID" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on AdverseEventGroup, AdverseEventStatistic, BaselineDenominator, BaselineGroup, BaselineMeasurement, DenominatorCount, FlowGroup, FlowMilestone, FlowWithdrawal, OutcomeGroup, OutcomeMeasurement." .
+ex:hasAdverseEventReport a owl:ObjectProperty ;
+    rdfs:label "has adverse event report" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:AdverseEventReport .
+ex:hasAnalysis a owl:ObjectProperty ;
+    rdfs:label "has analysis" ;
+    rdfs:domain ex:OutcomeMeasure ;
+    rdfs:range ex:StatisticalAnalysis .
+ex:hasArm a owl:ObjectProperty ;
+    rdfs:label "has arm" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:ArmGroup .
+ex:hasAvailableIpd a owl:ObjectProperty ;
+    rdfs:label "has available IPD" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:AvailableIpd .
+ex:hasBaselineDenominator a owl:ObjectProperty ;
+    rdfs:label "has baseline denominator" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:BaselineDenominator .
+ex:hasBaselineGroup a owl:ObjectProperty ;
+    rdfs:label "has baseline group" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:BaselineGroup .
+ex:hasBaselineMeasure a owl:ObjectProperty ;
+    rdfs:label "has baseline measure" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:BaselineMeasure .
+ex:hasCondition a owl:ObjectProperty ;
+    rdfs:label "has condition" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:Condition .
+ex:hasDataMonitoringCommittee a owl:DatatypeProperty ;
+    rdfs:label "has data monitoring committee" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:hasDenominator a owl:ObjectProperty ;
+    rdfs:label "has denominator" ;
+    rdfs:domain ex:OutcomeMeasure ;
+    rdfs:range ex:DenominatorCount .
+ex:hasDocument a owl:ObjectProperty ;
+    rdfs:label "has document" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:StudyDocument .
+ex:hasEvent a owl:ObjectProperty ;
+    rdfs:label "has event" ;
+    rdfs:domain ex:AdverseEventReport ;
+    rdfs:range ex:AdverseEvent .
+ex:hasExpandedAccess a owl:DatatypeProperty ;
+    rdfs:label "has expanded access" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:hasFlowGroup a owl:ObjectProperty ;
+    rdfs:label "has flow group" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:FlowGroup .
+ex:hasFlowPeriod a owl:ObjectProperty ;
+    rdfs:label "has flow period" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:FlowPeriod .
+ex:hasGroup a owl:ObjectProperty ;
+    rdfs:label "has group" ;
+    rdfs:comment "used on AdverseEventReport, OutcomeMeasure. points to AdverseEventGroup, OutcomeGroup." .
+ex:hasIcf a owl:DatatypeProperty ;
+    rdfs:label "has icf" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:boolean .
+ex:hasIntervention a owl:ObjectProperty ;
+    rdfs:label "has intervention" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:Intervention .
+ex:hasMeasurement a owl:ObjectProperty ;
+    rdfs:label "has measurement" ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure. points to BaselineMeasurement, OutcomeMeasurement." .
+ex:hasMilestone a owl:ObjectProperty ;
+    rdfs:label "has milestone" ;
+    rdfs:domain ex:FlowPeriod ;
+    rdfs:range ex:FlowMilestone .
+ex:hasOfficial a owl:ObjectProperty ;
+    rdfs:label "has official" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:StudyOfficial .
+ex:hasOtherOutcome a owl:ObjectProperty ;
+    rdfs:label "has other outcome" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:PlannedOutcome .
+ex:hasOutcomeMeasure a owl:ObjectProperty ;
+    rdfs:label "has outcome measure" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:OutcomeMeasure .
+ex:hasPrimaryOutcome a owl:ObjectProperty ;
+    rdfs:label "has primary outcome" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:PlannedOutcome .
+ex:hasProtocol a owl:DatatypeProperty ;
+    rdfs:label "has protocol" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:boolean .
+ex:hasReference a owl:ObjectProperty ;
+    rdfs:label "has reference" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:StudyReference .
+ex:hasResults a owl:DatatypeProperty ;
+    rdfs:label "has results" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:hasResultsSubmissionCycle a owl:ObjectProperty ;
+    rdfs:label "has results submission cycle" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:ResultsSubmissionCycle .
+ex:hasSap a owl:DatatypeProperty ;
+    rdfs:label "has sap" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:boolean .
+ex:hasSecondaryId a owl:ObjectProperty ;
+    rdfs:label "has secondary ID" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:SecondaryIdentifier .
+ex:hasSecondaryOutcome a owl:ObjectProperty ;
+    rdfs:label "has secondary outcome" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:PlannedOutcome .
+ex:hasSeeAlsoLink a owl:ObjectProperty ;
+    rdfs:label "has see also link" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:SeeAlsoLink .
+ex:hasSite a owl:ObjectProperty ;
+    rdfs:label "has site" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:StudySite .
+ex:hasStatistic a owl:ObjectProperty ;
+    rdfs:label "has statistic" ;
+    rdfs:domain ex:AdverseEvent ;
+    rdfs:range ex:AdverseEventStatistic .
+ex:hasUnpostedEvent a owl:ObjectProperty ;
+    rdfs:label "has unposted event" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:UnpostedResultsEvent .
+ex:hasViolationEvent a owl:ObjectProperty ;
+    rdfs:label "has violation event" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:ViolationEvent .
+ex:hasWithdrawal a owl:ObjectProperty ;
+    rdfs:label "has withdrawal" ;
+    rdfs:domain ex:FlowPeriod ;
+    rdfs:range ex:FlowWithdrawal .
+ex:healthyVolunteers a owl:DatatypeProperty ;
+    rdfs:label "healthy volunteers" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:identifierDomain a owl:DatatypeProperty ;
+    rdfs:label "identifier domain" ;
+    rdfs:domain ex:SecondaryIdentifier ;
+    rdfs:range xsd:string .
+ex:identifierLink a owl:DatatypeProperty ;
+    rdfs:label "identifier link" ;
+    rdfs:domain ex:SecondaryIdentifier ;
+    rdfs:range xsd:string .
+ex:identifierType a owl:DatatypeProperty ;
+    rdfs:label "identifier type" ;
+    rdfs:domain ex:SecondaryIdentifier ;
+    rdfs:range xsd:string .
+ex:identifierValue a owl:DatatypeProperty ;
+    rdfs:label "identifier value" ;
+    rdfs:domain ex:SecondaryIdentifier ;
+    rdfs:range xsd:string .
+ex:inArm a owl:ObjectProperty ;
+    rdfs:label "in arm" ;
+    rdfs:domain ex:Intervention ;
+    rdfs:range ex:ArmGroup .
+ex:interventionMesh a owl:ObjectProperty ;
+    rdfs:label "intervention MeSH" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:MeSHConcept .
+ex:interventionModel a owl:DatatypeProperty ;
+    rdfs:label "intervention model" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:interventionModelDescription a owl:DatatypeProperty ;
+    rdfs:label "intervention model description" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:interventionName a owl:DatatypeProperty ;
+    rdfs:label "intervention name" ;
+    rdfs:domain ex:Intervention ;
+    rdfs:range xsd:string .
+ex:interventionType a owl:DatatypeProperty ;
+    rdfs:label "intervention type" ;
+    rdfs:domain ex:Intervention ;
+    rdfs:range xsd:string .
+ex:ipdAccessCriteria a owl:DatatypeProperty ;
+    rdfs:label "IPD access criteria" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:ipdId a owl:DatatypeProperty ;
+    rdfs:label "IPD ID" ;
+    rdfs:domain ex:AvailableIpd ;
+    rdfs:range xsd:string .
+ex:ipdInfoType a owl:DatatypeProperty ;
+    rdfs:label "IPD info type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:ipdSharing a owl:DatatypeProperty ;
+    rdfs:label "IPD sharing" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:ipdSharingDescription a owl:DatatypeProperty ;
+    rdfs:label "IPD sharing description" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:ipdTimeFrame a owl:DatatypeProperty ;
+    rdfs:label "IPD time frame" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:ipdType a owl:DatatypeProperty ;
+    rdfs:label "IPD type" ;
+    rdfs:domain ex:AvailableIpd ;
+    rdfs:range xsd:string .
+ex:ipdUrl a owl:DatatypeProperty ;
+    rdfs:label "IPD URL" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:isFdaRegulatedDevice a owl:DatatypeProperty ;
+    rdfs:label "is FDA regulated device" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:isFdaRegulatedDrug a owl:DatatypeProperty ;
+    rdfs:label "is FDA regulated drug" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:isPediatricPostmarketSurveillance a owl:DatatypeProperty ;
+    rdfs:label "is pediatric postmarket surveillance" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:isRetracted a owl:DatatypeProperty ;
+    rdfs:label "is retracted" ;
+    rdfs:domain ex:StudyReference ;
+    rdfs:range xsd:boolean .
+ex:isUnapprovedDevice a owl:DatatypeProperty ;
+    rdfs:label "is unapproved device" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:isUsExport a owl:DatatypeProperty ;
+    rdfs:label "is US export" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:issuedDate a owl:DatatypeProperty ;
+    rdfs:label "issued date" ;
+    rdfs:domain ex:ViolationEvent ;
+    rdfs:range xsd:date .
+ex:keyword a owl:DatatypeProperty ;
+    rdfs:label "keyword" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:lastKnownStatus a owl:DatatypeProperty ;
+    rdfs:label "last known status" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:lastUpdatePostDate a owl:DatatypeProperty ;
+    rdfs:label "last update post date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:lastUpdatePostDateType a owl:DatatypeProperty ;
+    rdfs:label "last update post date type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:lastUpdateSubmitDate a owl:DatatypeProperty ;
+    rdfs:label "last update submit date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:leadSponsor a owl:ObjectProperty ;
+    rdfs:label "lead sponsor" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:Organization .
+ex:limitationsAndCaveats a owl:DatatypeProperty ;
+    rdfs:label "limitations and caveats" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:linkConfidence a owl:DatatypeProperty ;
+    rdfs:label "link confidence" ;
+    rdfs:domain ex:FdaSubmissionLink ;
+    rdfs:range xsd:string .
+ex:linkMethod a owl:DatatypeProperty ;
+    rdfs:label "link method" ;
+    rdfs:domain ex:FdaSubmissionLink ;
+    rdfs:range xsd:string .
+ex:lowerLimit a owl:DatatypeProperty ;
+    rdfs:label "lower limit" ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "used on BaselineMeasurement, OutcomeMeasurement." .
+ex:maskedRole a owl:DatatypeProperty ;
+    rdfs:label "masked role" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:masking a owl:DatatypeProperty ;
+    rdfs:label "masking" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:maskingDescription a owl:DatatypeProperty ;
+    rdfs:label "masking description" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:maximumAge a owl:DatatypeProperty ;
+    rdfs:label "maximum age" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:meshId a owl:DatatypeProperty ;
+    rdfs:label "MeSH descriptor identifier" ;
+    rdfs:domain ex:MeSHConcept ;
+    rdfs:range xsd:string .
+ex:milestoneType a owl:DatatypeProperty ;
+    rdfs:label "milestone type" ;
+    rdfs:domain ex:FlowMilestone ;
+    rdfs:range xsd:string .
+ex:minimumAge a owl:DatatypeProperty ;
+    rdfs:label "minimum age" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:nctId a owl:DatatypeProperty ;
+    rdfs:label "NCT identifier" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:nctIdAlias a owl:DatatypeProperty ;
+    rdfs:label "former NCT identifier" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:nihCoreProjectNumber a owl:DatatypeProperty ;
+    rdfs:label "NIH core project number" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:noStatisticalAnalysisPlan a owl:DatatypeProperty ;
+    rdfs:label "no statistical analysis plan" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:nonInferiorityComment a owl:DatatypeProperty ;
+    rdfs:label "non inferiority comment" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:nonInferiorityType a owl:DatatypeProperty ;
+    rdfs:label "non inferiority type" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:normalizedName a owl:DatatypeProperty ;
+    rdfs:label "normalized name" ;
+    rdfs:domain ex:Organization ;
+    rdfs:range xsd:string .
+ex:notes a owl:DatatypeProperty ;
+    rdfs:label "notes" ;
+    rdfs:domain ex:AdverseEvent ;
+    rdfs:range xsd:string .
+ex:numAffected a owl:DatatypeProperty ;
+    rdfs:label "num affected" ;
+    rdfs:domain ex:AdverseEventStatistic ;
+    rdfs:range xsd:integer .
+ex:numAtRisk a owl:DatatypeProperty ;
+    rdfs:label "num at risk" ;
+    rdfs:domain ex:AdverseEventStatistic ;
+    rdfs:range xsd:integer .
+ex:numEvents a owl:DatatypeProperty ;
+    rdfs:label "num events" ;
+    rdfs:domain ex:AdverseEventStatistic ;
+    rdfs:range xsd:integer .
+ex:numSubjects a owl:DatatypeProperty ;
+    rdfs:label "num subjects" ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "used on FlowMilestone, FlowWithdrawal." .
+ex:numUnits a owl:DatatypeProperty ;
+    rdfs:label "num units" ;
+    rdfs:domain ex:FlowMilestone ;
+    rdfs:range xsd:integer .
+ex:observationalModel a owl:DatatypeProperty ;
+    rdfs:label "observational model" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:officialRole a owl:DatatypeProperty ;
+    rdfs:label "official role" ;
+    rdfs:domain ex:StudyOfficial ;
+    rdfs:range xsd:string .
+ex:officialTitle a owl:DatatypeProperty ;
+    rdfs:label "official title" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:orgStudyId a owl:DatatypeProperty ;
+    rdfs:label "org study ID" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:orgStudyIdLink a owl:DatatypeProperty ;
+    rdfs:label "org study ID link" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:orgStudyIdType a owl:DatatypeProperty ;
+    rdfs:label "org study ID type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:organSystem a owl:DatatypeProperty ;
+    rdfs:label "organ system" ;
+    rdfs:domain ex:AdverseEvent ;
+    rdfs:range xsd:string .
+ex:organizationClass a owl:DatatypeProperty ;
+    rdfs:label "organization class" ;
+    rdfs:domain ex:Organization ;
+    rdfs:range xsd:string .
+ex:otherAnalysisDescription a owl:DatatypeProperty ;
+    rdfs:label "other analysis description" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:otherName a owl:DatatypeProperty ;
+    rdfs:label "other name" ;
+    rdfs:domain ex:Intervention ;
+    rdfs:range xsd:string .
+ex:otherNumAffected a owl:DatatypeProperty ;
+    rdfs:label "other num affected" ;
+    rdfs:domain ex:AdverseEventGroup ;
+    rdfs:range xsd:integer .
+ex:otherNumAtRisk a owl:DatatypeProperty ;
+    rdfs:label "other num at risk" ;
+    rdfs:domain ex:AdverseEventGroup ;
+    rdfs:range xsd:integer .
+ex:outcomeType a owl:DatatypeProperty ;
+    rdfs:label "outcome type" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on OutcomeMeasure, PlannedOutcome." .
+ex:overallStatus a owl:DatatypeProperty ;
+    rdfs:label "overall status" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:pValue a owl:DatatypeProperty ;
+    rdfs:label "p-value" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:decimal .
+ex:pValueComment a owl:DatatypeProperty ;
+    rdfs:label "p value comment" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:pValueText a owl:DatatypeProperty ;
+    rdfs:label "p value text" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:paramType a owl:DatatypeProperty ;
+    rdfs:label "param type" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure, StatisticalAnalysis." .
+ex:paramValue a owl:DatatypeProperty ;
+    rdfs:label "param value" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:decimal .
+ex:patientRegistry a owl:DatatypeProperty ;
+    rdfs:label "patient registry" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:person a owl:ObjectProperty ;
+    rdfs:label "person" ;
+    rdfs:domain ex:StudyOfficial ;
+    rdfs:range ex:Person .
+ex:phase a owl:DatatypeProperty ;
+    rdfs:label "phase" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:piSponsorEmployee a owl:DatatypeProperty ;
+    rdfs:label "pi sponsor employee" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:pmid a owl:DatatypeProperty ;
+    rdfs:label "PubMed identifier" ;
+    rdfs:domain ex:Publication ;
+    rdfs:range xsd:string .
+ex:populationDescription a owl:DatatypeProperty ;
+    rdfs:label "population description" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure." .
+ex:postalCode a owl:DatatypeProperty ;
+    rdfs:label "postal code" ;
+    rdfs:domain ex:StudySite ;
+    rdfs:range xsd:string .
+ex:postedDate a owl:DatatypeProperty ;
+    rdfs:label "posted date" ;
+    rdfs:domain ex:ViolationEvent ;
+    rdfs:range xsd:date .
+ex:preAssignmentDetails a owl:DatatypeProperty ;
+    rdfs:label "pre assignment details" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:primaryCompletionDate a owl:DatatypeProperty ;
+    rdfs:label "primary completion date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:comment "values typed xsd:date, xsd:gYearMonth." .
+ex:primaryCompletionDateType a owl:DatatypeProperty ;
+    rdfs:label "primary completion date type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:primaryPurpose a owl:DatatypeProperty ;
+    rdfs:label "primary purpose" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:publication a owl:ObjectProperty ;
+    rdfs:label "publication" ;
+    rdfs:domain ex:StudyReference ;
+    rdfs:range ex:Publication .
+ex:qcReviewRound a owl:DatatypeProperty ;
+    rdfs:label "QC review round" ;
+    rdfs:domain ex:ResultsSubmissionCycle ;
+    rdfs:range xsd:integer .
+ex:recruitmentDetails a owl:DatatypeProperty ;
+    rdfs:label "recruitment details" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:recruitmentStatus a owl:DatatypeProperty ;
+    rdfs:label "recruitment status" ;
+    rdfs:domain ex:StudySite ;
+    rdfs:range xsd:string .
+ex:referenceType a owl:DatatypeProperty ;
+    rdfs:label "reference type" ;
+    rdfs:domain ex:StudyReference ;
+    rdfs:range xsd:string .
+ex:releaseDate a owl:DatatypeProperty ;
+    rdfs:label "release date" ;
+    rdfs:range xsd:date ;
+    rdfs:comment "used on ResultsSubmissionCycle, ViolationEvent." .
+ex:removedCountry a owl:DatatypeProperty ;
+    rdfs:label "removed country" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:reportingStatus a owl:DatatypeProperty ;
+    rdfs:label "reporting status" ;
+    rdfs:domain ex:OutcomeMeasure ;
+    rdfs:range xsd:string .
+ex:resetDate a owl:DatatypeProperty ;
+    rdfs:label "reset date" ;
+    rdfs:domain ex:ResultsSubmissionCycle ;
+    rdfs:range xsd:date .
+ex:responsibleInvestigator a owl:ObjectProperty ;
+    rdfs:label "responsible investigator" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:Person .
+ex:responsibleInvestigatorTitle a owl:DatatypeProperty ;
+    rdfs:label "responsible investigator title" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:responsiblePartyOldNameTitle a owl:DatatypeProperty ;
+    rdfs:label "responsible party old name title" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:responsiblePartyOldOrganization a owl:DatatypeProperty ;
+    rdfs:label "responsible party old organization" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:responsiblePartyType a owl:DatatypeProperty ;
+    rdfs:label "responsible party type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:restrictionDetails a owl:DatatypeProperty ;
+    rdfs:label "restriction details" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:restrictionType a owl:DatatypeProperty ;
+    rdfs:label "restriction type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:restrictiveAgreement a owl:DatatypeProperty ;
+    rdfs:label "restrictive agreement" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:boolean .
+ex:resultsFirstPostDate a owl:DatatypeProperty ;
+    rdfs:label "results first post date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:resultsFirstPostDateType a owl:DatatypeProperty ;
+    rdfs:label "results first post date type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:resultsFirstSubmitDate a owl:DatatypeProperty ;
+    rdfs:label "results first submit date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:resultsFirstSubmitQcDate a owl:DatatypeProperty ;
+    rdfs:label "results first submit QC date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:resultsPointOfContactOrganization a owl:DatatypeProperty ;
+    rdfs:label "results point of contact organization" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:retractionNotice a owl:ObjectProperty ;
+    rdfs:label "retraction notice" ;
+    rdfs:domain ex:StudyReference ;
+    rdfs:range ex:Publication .
+ex:retractionSource a owl:DatatypeProperty ;
+    rdfs:label "retraction source" ;
+    rdfs:domain ex:StudyReference ;
+    rdfs:range xsd:string .
+ex:retrievedAt a owl:DatatypeProperty ;
+    rdfs:label "retrieved at" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:samplingMethod a owl:DatatypeProperty ;
+    rdfs:label "sampling method" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:seriousNumAffected a owl:DatatypeProperty ;
+    rdfs:label "serious num affected" ;
+    rdfs:domain ex:AdverseEventGroup ;
+    rdfs:range xsd:integer .
+ex:seriousNumAtRisk a owl:DatatypeProperty ;
+    rdfs:label "serious num at risk" ;
+    rdfs:domain ex:AdverseEventGroup ;
+    rdfs:range xsd:integer .
+ex:seriousness a owl:DatatypeProperty ;
+    rdfs:label "seriousness" ;
+    rdfs:domain ex:AdverseEvent ;
+    rdfs:range xsd:string .
+ex:sex a owl:DatatypeProperty ;
+    rdfs:label "sex" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:sizeBytes a owl:DatatypeProperty ;
+    rdfs:label "size bytes" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:integer .
+ex:sourceDataset a owl:DatatypeProperty ;
+    rdfs:label "source dataset" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:sourceRecordId a owl:DatatypeProperty ;
+    rdfs:label "source record ID" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:sourceUrl a owl:DatatypeProperty ;
+    rdfs:label "source URL" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:sourceVersionDate a owl:DatatypeProperty ;
+    rdfs:label "source version date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:sourceVocabulary a owl:DatatypeProperty ;
+    rdfs:label "source vocabulary" ;
+    rdfs:domain ex:AdverseEvent ;
+    rdfs:range xsd:string .
+ex:spread a owl:DatatypeProperty ;
+    rdfs:label "spread" ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "used on BaselineMeasurement, OutcomeMeasurement." .
+ex:startDate a owl:DatatypeProperty ;
+    rdfs:label "start date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:comment "values typed xsd:date, xsd:gYearMonth." .
+ex:startDateType a owl:DatatypeProperty ;
+    rdfs:label "start date type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:state a owl:DatatypeProperty ;
+    rdfs:label "state" ;
+    rdfs:domain ex:StudySite ;
+    rdfs:range xsd:string .
+ex:statisticalComment a owl:DatatypeProperty ;
+    rdfs:label "statistical comment" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:statisticalMethod a owl:DatatypeProperty ;
+    rdfs:label "statistical method" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:string .
+ex:statusVerifiedDate a owl:DatatypeProperty ;
+    rdfs:label "status verified date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:comment "values typed xsd:date, xsd:gYearMonth." .
+ex:stdAge a owl:DatatypeProperty ;
+    rdfs:label "std age" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:study a owl:ObjectProperty ;
+    rdfs:label "study" ;
+    rdfs:domain ex:FdaSubmissionLink ;
+    rdfs:range ex:ClinicalStudy .
+ex:studyFirstSubmitDate a owl:DatatypeProperty ;
+    rdfs:label "study first submit date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:studyFirstSubmitQcDate a owl:DatatypeProperty ;
+    rdfs:label "study first submit QC date" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:date .
+ex:studyPopulation a owl:DatatypeProperty ;
+    rdfs:label "study population" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:studyType a owl:DatatypeProperty ;
+    rdfs:label "study type" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:submissionNumber a owl:DatatypeProperty ;
+    rdfs:label "submission number" ;
+    rdfs:domain ex:FdaSubmissionLink ;
+    rdfs:range xsd:string .
+ex:submissionType a owl:DatatypeProperty ;
+    rdfs:label "submission type" ;
+    rdfs:domain ex:FdaSubmissionLink ;
+    rdfs:range xsd:string .
+ex:submittingOrganization a owl:ObjectProperty ;
+    rdfs:label "submitting organization" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:Organization .
+ex:targetDuration a owl:DatatypeProperty ;
+    rdfs:label "target duration" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:term a owl:DatatypeProperty ;
+    rdfs:label "term" ;
+    rdfs:domain ex:AdverseEvent ;
+    rdfs:range xsd:string .
+ex:testedNonInferiority a owl:DatatypeProperty ;
+    rdfs:label "tested non inferiority" ;
+    rdfs:domain ex:StatisticalAnalysis ;
+    rdfs:range xsd:boolean .
+ex:timeFrame a owl:DatatypeProperty ;
+    rdfs:label "time frame" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on AdverseEventReport, OutcomeMeasure, PlannedOutcome." .
+ex:timePerspective a owl:DatatypeProperty ;
+    rdfs:label "time perspective" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:title a owl:DatatypeProperty ;
+    rdfs:label "title" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure." .
+ex:typeUnitsAnalyzed a owl:DatatypeProperty ;
+    rdfs:label "type units analyzed" ;
+    rdfs:domain ex:OutcomeMeasure ;
+    rdfs:range xsd:string .
+ex:unitOfMeasure a owl:DatatypeProperty ;
+    rdfs:label "unit of measure" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasure, OutcomeMeasure." .
+ex:units a owl:DatatypeProperty ;
+    rdfs:label "units" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineDenominator, DenominatorCount." .
+ex:unpostedResponsibleParty a owl:DatatypeProperty ;
+    rdfs:label "unposted responsible party" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:unreleaseDate a owl:DatatypeProperty ;
+    rdfs:label "unrelease date" ;
+    rdfs:domain ex:ResultsSubmissionCycle ;
+    rdfs:range xsd:date .
+ex:unreleaseDateUnknown a owl:DatatypeProperty ;
+    rdfs:label "unrelease date unknown" ;
+    rdfs:domain ex:ResultsSubmissionCycle ;
+    rdfs:range xsd:boolean .
+ex:uploadDate a owl:DatatypeProperty ;
+    rdfs:label "upload date" ;
+    rdfs:domain ex:StudyDocument ;
+    rdfs:range xsd:date .
+ex:upperLimit a owl:DatatypeProperty ;
+    rdfs:label "upper limit" ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "used on BaselineMeasurement, OutcomeMeasurement." .
+ex:url a owl:DatatypeProperty ;
+    rdfs:label "URL" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on AvailableIpd, SeeAlsoLink." .
+ex:value a owl:DatatypeProperty ;
+    rdfs:label "value" ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "used on BaselineMeasurement, OutcomeMeasurement." .
+ex:valueText a owl:DatatypeProperty ;
+    rdfs:label "value text" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "used on BaselineMeasurement, OutcomeMeasurement." .
+ex:whyStopped a owl:DatatypeProperty ;
+    rdfs:label "why stopped" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range xsd:string .
+ex:withdrawalReason a owl:DatatypeProperty ;
+    rdfs:label "withdrawal reason" ;
+    rdfs:domain ex:FlowWithdrawal ;
+    rdfs:range xsd:string .

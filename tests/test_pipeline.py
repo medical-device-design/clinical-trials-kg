@@ -93,6 +93,11 @@ def main():
           pubs and all(str(g.value(p, RDFS.label)) == "PMID " + str(g.value(p, EX.pmid)) for p in pubs))
     nih = rdflib.URIRef("https://bmedesign.org/core/id/nih-project/R01EB012345")
     check("NIH link uses the canonical core IRI (ids/identifiers.yaml)", (S1, EX.fundedByNihProject, nih) in g)
+    onto = rdflib.Graph().parse(os.path.join(ROOT, "ontology", "ontology.ttl"))
+    declared = set(onto.subjects(RDF.type, None))
+    used = {t for t in set(g.predicates()) | set(g.objects(None, RDF.type)) if str(t).startswith(str(EX))}
+    check("every ex: term the converter emits is declared in ontology.ttl (L2-MAPPING)",
+          used <= declared, sorted(str(t) for t in used - declared)[:5])
     vg = rdflib.Graph().parse(os.path.join(out, "void.ttl"))
     DCT = rdflib.Namespace("http://purl.org/dc/terms/")
     ds = rdflib.URIRef("https://bmedesign.org/clinical-trials-kg/")
