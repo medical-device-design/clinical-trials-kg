@@ -36,7 +36,7 @@ SCOPE=all TAG=full-$(date +%F) bash scripts/run_pilot.sh   # full load
 
 ## Local query endpoint (VM .83)
 
-The device-study build (77,301 studies, 28.3 M triples) is loaded in TDB2 at `/srv/clinical-trials-kg/tdb2/device-2026-11-20` and served read-only by Fuseki on `http://localhost:3032/clinical-trials/sparql` (localhost only). Reach it from a PC with `ssh -L 3032:localhost:3032 <user>@10.22.12.83` over the Hofstra VPN. The full build (343 M triples) is not loaded, to spare the shared disk.
+The full build (612,892 studies, 343,250,455 triples, ClinicalTrials.gov snapshot of November 21, 2026) is loaded in TDB2 at `/srv/clinical-trials-kg/tdb2/full-2026-11-21` (32 GB, xloader, 1 h 38 min) and served read-only by Fuseki on `http://localhost:3032/clinical-trials/sparql` (localhost only, dataset `/clinical-trials`). Reach it from a PC with `ssh -L 3032:localhost:3032 <user>@10.22.12.83` over the Hofstra VPN. A count of `ClinicalStudy` returns 612,892 in under 1 s. `scripts/load_tdb2.sh` rebuilds the store and switches Fuseki after each quarterly refresh.
 
 ## Output
 
@@ -57,7 +57,7 @@ Every cross-graph link states its method and confidence. None is asserted as ide
 
 The results data model (outcome measures, groups, denominators, measurements, statistical analyses, adverse-event groups and per-group statistics), the field map, partial-date typing and the device-name scorer were first built by **Adelyn Mathew** (HUSSRP 2026, mentor Roche de Guzman) on the `clinicaltrials-harvester` branch of `medical-device-design/medical-device-kg`, last commit `d3be34e`. This repository ports that work to the rebuild standard.
 
-## Licence
+## License
 
 CC0 1.0 for the code, ontology and compiled graph (see `LICENSE`), the same as medical-device-kg and the FDA graphs. Source data are from ClinicalTrials.gov (U.S. National Library of Medicine). Every study records its source, ClinicalTrials.gov page, retrieval date and NLM processing date, and `LICENSE` states the modifications. MedDRA adverse-event term text is third-party content excluded from the dedication.
 
