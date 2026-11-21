@@ -78,6 +78,28 @@ def main():
     check("'Medtronic, Inc.' and 'MEDTRONIC INC' are one organization",
           len({o for o in g.objects(None, EX.leadSponsor) if "medtronic" in str(o)}) == 1)
 
+    print("master control rules (bmedesign-kg)")
+    SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
+    med = next(o for o in g.objects(None, EX.leadSponsor) if "medtronic" in str(o))
+    labels = set(g.objects(med, RDFS.label))
+    check("one rdfs:label per organization across pages (L1-LABEL), mixed case preferred on a tie",
+          labels == {rdflib.Literal("Medtronic, Inc.")}, labels)
+    check("other spelling kept as skos:altLabel",
+          set(g.objects(med, SKOS.altLabel)) == {rdflib.Literal("MEDTRONIC INC")})
+    multi = [s for s in set(g.subjects(RDFS.label, None)) if len(set(g.objects(s, RDFS.label))) > 1]
+    check("no node has two rdfs:label values", not multi, multi[:3])
+    pubs = list(g.subjects(RDF.type, EX.Publication))
+    check("publications carry one label 'PMID N'",
+          pubs and all(str(g.value(p, RDFS.label)) == "PMID " + str(g.value(p, EX.pmid)) for p in pubs))
+    nih = rdflib.URIRef("https://bmedesign.org/core/id/nih-project/R01EB012345")
+    check("NIH link uses the canonical core IRI (ids/identifiers.yaml)", (S1, EX.fundedByNihProject, nih) in g)
+    vg = rdflib.Graph().parse(os.path.join(out, "void.ttl"))
+    DCT = rdflib.Namespace("http://purl.org/dc/terms/")
+    ds = rdflib.URIRef("https://bmedesign.org/clinical-trials-kg/")
+    check("void.ttl: CC0, version, snapshot date (L2-METADATA)",
+          (ds, DCT.license, rdflib.URIRef("https://creativecommons.org/publicdomain/zero/1.0/")) in vg
+          and str(vg.value(ds, rdflib.OWL.versionInfo)) == "v0.0.1" and vg.value(ds, DCT.issued) is not None)
+
     print("full data kept")
     dd = str(g.value(S1, EX.detailedDescription))
     check("50,000-character description kept whole", len(dd) == 50000, len(dd))

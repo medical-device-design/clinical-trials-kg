@@ -36,9 +36,10 @@ ID = "https://bmedesign.org/clinical-trials-kg/id/"   # instances
 CTGOV_STUDY = "https://clinicaltrials.gov/study/"
 PUBMED = "https://identifiers.org/pubmed:"
 MESH = "http://id.nlm.nih.gov/mesh/"
-# research-award-kg (formerly nih-reporter-kg) project IRI base. CONFIRM against its iri.py
-# before the first linkage run (see docs/OPEN_ITEMS.md).
-NIH_REPORTER_PROJECT = "https://bmedesign.org/research-award-kg/id/project/"
+# NIH core project: the canonical IRI set by the master control (bmedesign-kg
+# ids/identifiers.yaml, nihProjectNumber.iri_template). research-award-kg links its own
+# project nodes to it with skos:exactMatch, so trials join awards through this IRI.
+NIH_PROJECT = "https://bmedesign.org/core/id/nih-project/"
 
 NCT = re.compile(r"^NCT\d{8}$")
 _SLUG = re.compile(r"[^a-z0-9]+")
@@ -134,7 +135,7 @@ def country(name):
 
 
 def nih_project(core_project_num):
-    return f"<{NIH_REPORTER_PROJECT}{_req(core_project_num, 'nih project')}>"
+    return f"<{NIH_PROJECT}{_req(core_project_num, 'nih project').upper()}>"
 
 
 # --- per-study children (never shared across studies) -------------------------

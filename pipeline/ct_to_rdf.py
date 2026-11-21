@@ -32,6 +32,7 @@ import gzip
 import json
 import os
 import sys
+from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -44,6 +45,9 @@ from common import (                         # noqa: E402
 from linkage import identifiers              # noqa: E402
 
 DATASET = "ClinicalTrials.gov"
+VERSION = "v0.0.1"            # must match registry/kgs.yaml current_release in bmedesign-kg
+TITLE = "ClinicalTrials.gov Knowledge Graph"
+LABELLED = ("org", "person", "cond", "country")   # shared nodes whose name can vary in spelling
 PREFIX = prefixes({
     "ex": iri.NS,
     "skos": "http://www.w3.org/2004/02/skos/core#",
@@ -84,11 +88,27 @@ class Writer:
     """Holds the output streams and the per-file 'already written' sets for
     shared nodes, so each shared node is described once per file."""
 
-    def __init__(self, out, links):
+    def __init__(self, out, links, preferred=None, collect=False):
         self.out, self.links = out, links
-        self.seen = {k: set() for k in ("org", "person", "cond", "mesh", "pub", "country")}
+        self.seen = {k: set() for k in ("org", "person", "cond", "mesh", "pub", "country", "alt")}
         self.triples = 0
         self.link_triples = 0
+        # One rdfs:label per shared node across ALL pages (master rule L1-LABEL):
+        # 'preferred' maps node IRI -> chosen spelling (from collect_names); any other
+        # spelling seen for the same node is written as skos:altLabel.
+        self.preferred = preferred or {}
+        self.variants = {k: {} for k in LABELLED} if collect else None
+
+    def _label(self, kind, s, name):
+        """rdfs:label value for a shared node, plus skos:altLabel for other spellings."""
+        name = (name or "").strip()
+        if self.variants is not None and name:
+            self.variants[kind].setdefault(s, Counter())[name] += 1
+        label = self.preferred.get(s, name)
+        if name and name != label and (s, name) not in self.seen["alt"]:
+            self.seen["alt"].add((s, name))
+            self.block(s, [("skos:altLabel", lit(name))])
+        return label
 
     @staticmethod
     def _scrub(pairs):
@@ -112,7 +132,8 @@ class Writer:
     def organization(self, name, org_class=None):
         name = scrub_emails(name)
         s = iri.organization(name)
-        self._once("org", s, s, [("a", "ex:Organization"), ("rdfs:label", lit(name)),
+        label = self._label("org", s, name)
+        self._once("org", s, s, [("a", "ex:Organization"), ("rdfs:label", lit(label)),
                                  ("ex:normalizedName", lit(iri.norm_name(name)))])
         if org_class:
             # class can differ by role (rare); write per occurrence, RDF dedups
@@ -122,14 +143,16 @@ class Writer:
     def person(self, name, affiliation):
         name, affiliation = scrub_emails(name), scrub_emails(affiliation)
         s = iri.person(name, affiliation)
-        self._once("person", s, s, [("a", "ex:Person"), ("rdfs:label", lit(name)),
+        label = self._label("person", s, name)
+        self._once("person", s, s, [("a", "ex:Person"), ("rdfs:label", lit(label)),
                                     ("ex:affiliation", lit(affiliation))])
         return s
 
     def condition(self, text):
         text = scrub_emails(text)
         s = iri.condition(text)
-        self._once("cond", s, s, [("a", "ex:Condition"), ("rdfs:label", lit(text))])
+        label = self._label("cond", s, text)
+        self._once("cond", s, s, [("a", "ex:Condition"), ("rdfs:label", lit(label))])
         return s
 
     def mesh(self, mid, term):
@@ -141,13 +164,15 @@ class Writer:
 
     def publication(self, pmid):
         s = iri.publication(pmid)
-        self._once("pub", s, s, [("a", "ex:Publication"), ("ex:pmid", lit(pmid)),
+        self._once("pub", s, s, [("a", "ex:Publication"), ("rdfs:label", lit(f"PMID {pmid}")),
+                                 ("ex:pmid", lit(pmid)),
                                  ("skos:exactMatch", iri.pubmed_external(pmid))])
         return s
 
     def country(self, name):
         s = iri.country(name)
-        self._once("country", s, s, [("a", "ex:Country"), ("rdfs:label", lit(name))])
+        label = self._label("country", s, name)
+        self._once("country", s, s, [("a", "ex:Country"), ("rdfs:label", lit(label))])
         return s
 
 
@@ -749,7 +774,63 @@ def _open_json(path):
         return json.load(f)
 
 
-def convert_page(in_path, out_dir, retrieved_at):
+class _Null:
+    def write(self, _):
+        return 0
+
+
+def _pick(counter):
+    """Preferred spelling: most frequent, then mixed case over ALL CAPS, then first in sort order."""
+    return sorted(counter.items(), key=lambda kv: (-kv[1], kv[0].isupper(), kv[0]))[0][0]
+
+
+def collect_names(download_dir, pages):
+    """Pre-pass over every page: for each shared node (organization, person, condition,
+    country) count the spellings that map to the same IRI. Returns {IRI: preferred
+    spelling} for nodes seen with more than one spelling. Without it each page would
+    label the node with whatever spelling it met first, and the loaded graph would
+    carry several rdfs:label values per node."""
+    merged = {}
+    for p in pages:
+        data = _open_json(os.path.join(download_dir, p))
+        studies = data.get("studies") if isinstance(data, dict) else data
+        w = Writer(_Null(), _Null(), collect=True)
+        for rec in studies or []:
+            try:
+                convert_study(w, rec, None)
+            except ValueError:
+                pass
+        for kind in LABELLED:
+            for s, c in w.variants[kind].items():
+                merged.setdefault(s, Counter()).update(c)
+    return {s: _pick(c) for s, c in merged.items() if len(c) > 1}
+
+
+def write_void(out_dir, stats):
+    """Dataset metadata (master rule L2-METADATA): title, CC0, version, snapshot date."""
+    base = "https://bmedesign.org/clinical-trials-kg/"
+    ttl = f"""@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<{base}> a void:Dataset ;
+    dcterms:title "{TITLE}" ;
+    dcterms:description "Every study registered on ClinicalTrials.gov (protocol and posted results) as RDF, with exact links to FDA submission numbers and NIH grants. Built by the BMEdesign group (PI Roche C. de Guzman)." ;
+    dcterms:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:source <https://clinicaltrials.gov/data-api/api> ;
+    owl:versionInfo "{VERSION}" ;
+    dcterms:issued "{str(stats['retrieved_at'])[:10]}"^^xsd:date ;
+    void:uriSpace "{base}id/" ;
+    void:vocabulary <{iri.NS}> ;
+    void:triples "{stats['triples'] + stats['link_triples']}"^^xsd:integer ;
+    void:entities "{stats['studies']}"^^xsd:integer .
+"""
+    with open(os.path.join(out_dir, "void.ttl"), "w", encoding="utf-8") as f:
+        f.write(ttl)
+
+
+def convert_page(in_path, out_dir, retrieved_at, preferred=None):
     """Convert one page file. Returns (studies, triples, link_triples, skipped)."""
     data = _open_json(in_path)
     studies = data.get("studies") if isinstance(data, dict) else data
@@ -762,7 +843,7 @@ def convert_page(in_path, out_dir, retrieved_at):
          open(link_p + ".tmp", "w", encoding="utf-8") as links:
         out.write(PREFIX + "\n")
         links.write(PREFIX + "\n")
-        w = Writer(out, links)
+        w = Writer(out, links, preferred)
         for rec in studies or []:
             try:
                 if convert_study(w, rec, retrieved_at):
@@ -787,9 +868,14 @@ def main(argv):
     retrieved_at = man["retrieved_at"]
     pages = sorted(p for p in os.listdir(args.download_dir)
                    if p.startswith("page_") and (p.endswith(".json") or p.endswith(".json.gz")))
+    os.makedirs(args.out_dir, exist_ok=True)
+    preferred = collect_names(args.download_dir, pages)
+    with gzip.open(os.path.join(args.out_dir, "preferred_labels.json.gz"), "wt", encoding="utf-8") as f:
+        json.dump(preferred, f, sort_keys=True)
+    print(f"[ct_to_rdf] {len(preferred)} shared nodes have more than one spelling; one is the label, the rest skos:altLabel")
     tot = {"studies": 0, "triples": 0, "link_triples": 0, "skipped": 0}
     for p in pages:
-        n, t, lt, sk = convert_page(os.path.join(args.download_dir, p), args.out_dir, retrieved_at)
+        n, t, lt, sk = convert_page(os.path.join(args.download_dir, p), args.out_dir, retrieved_at, preferred)
         tot["studies"] += n
         tot["triples"] += t
         tot["link_triples"] += lt
@@ -798,8 +884,10 @@ def main(argv):
     tot["pages"] = len(pages)
     tot["retrieved_at"] = retrieved_at
     tot["manifest_total"] = man.get("total_count")
+    tot["preferred_labels"] = len(preferred)
     with open(os.path.join(args.out_dir, "convert_stats.json"), "w") as f:
         json.dump(tot, f, indent=2)
+    write_void(args.out_dir, tot)
     print(json.dumps(tot, indent=2))
     if man.get("total_count") is not None and tot["studies"] + tot["skipped"] != man["total_count"]:
         print("[ct_to_rdf] ERROR: converted + skipped != manifest total", file=sys.stderr)
