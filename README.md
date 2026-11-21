@@ -15,12 +15,12 @@ ClinicalTrials.gov as a knowledge graph for the Open Knowledge Network (okn.us),
 | `pipeline/common.py` | Literals, provenance, block writer (partial dates, plain decimals, e-mail scrub) |
 | `pipeline/ct_to_rdf.py` | API v2 records to Turtle, one file per page |
 | `pipeline/linkage/identifiers.py` | Exact IDs in secondary IDs: IDE, 510(k), PMA, De Novo, HDE, IND, NDA, BLA, NIH grants |
-| `pipeline/linkage/device_match.py` | Weak device-to-product-code candidates (offline, scored) |
+| `pipeline/linkage/device_match.py` | Baseline device-to-product-code candidates (not published; the shared matcher lives in bmedesign-kg) |
 | `scripts/fetch_ct.py` | Paged download of full records, manifest with counts and checksums |
 | `scripts/validate.sh` | riot plus Jena SHACL per page, then `check_graph.py` |
 | `scripts/check_graph.py` | Orphans, e-mails, forbidden contact fields, class counts |
 | `scripts/run_pilot.sh` | Tests, fetch, convert, validate, measure |
-| `scripts/weekly_delta.sh` | Weekly update by last-update date |
+| `scripts/weekly_delta.sh` | Update by last-update date, run quarterly per the master-control policy or on demand |
 | `ontology/shapes/ct.shacl.ttl` | SHACL shapes |
 | `tests/` | Synthetic records and end-to-end tests |
 
@@ -43,7 +43,7 @@ The device-study build (77,301 studies, 28.3 M triples) is loaded in TDB2 at `/s
 Per page of up to 1,000 studies:
 * `page_NNNNN.ttl` is the core graph (studies, arms, interventions, outcomes, results, adverse events, sites, officials, references)
 * `page_NNNNN.links.ttl` is the exact-identifier linkage (FDA submission numbers, NIH core project numbers)
-* `devicematch/page_NNNNN.devicematch.ttl` is optional weak product-code candidates
+* `devicematch/page_NNNNN.devicematch.ttl` is the baseline product-code candidates, kept out of the published graph
 
 Every cross-graph link states its method and confidence. None is asserted as identity.
 
