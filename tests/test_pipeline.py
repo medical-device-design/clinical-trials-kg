@@ -130,7 +130,9 @@ def main():
 
     print("privacy")
     ttl = "".join(open(os.path.join(out, f)).read() for f in os.listdir(out) if f.endswith(".ttl"))
-    check("no e-mail addresses anywhere", "@testco" not in ttl and "@clinic" not in ttl)
+    check("no e-mail addresses anywhere (incl. official names, affiliations, URLs)",
+          "@testco" not in ttl and "@clinic" not in ttl and "@uni" not in ttl)
+    check("no e-mail fragments inside IRIs", "uni-example-edu" not in ttl, "")
     check("e-mail in summary replaced with [EMAIL REMOVED]", "[EMAIL REMOVED]" in ttl)
     check("central and site contact names not written", "Pat Contact" not in ttl and "Site Person" not in ttl)
     check("contact phones not written", "555-01" not in ttl)

@@ -38,7 +38,7 @@ sys.path.insert(0, HERE)
 
 import iri                                   # noqa: E402
 from common import (                         # noqa: E402
-    lit, text_lit, bool_lit, int_lit, float_lit, date_lit, as_list,
+    EMAIL, EMAIL_MASK, scrub_emails, lit, text_lit, bool_lit, int_lit, float_lit, date_lit, as_list,
     provenance, write_block, prefixes,
 )
 from linkage import identifiers              # noqa: E402
@@ -90,11 +90,18 @@ class Writer:
         self.triples = 0
         self.link_triples = 0
 
+    @staticmethod
+    def _scrub(pairs):
+        """Last line of defence: no literal leaves the converter with an e-mail in
+        it, whatever field it came from (the pilot found e-mails in official names,
+        affiliations and see-also URLs)."""
+        return [(p, EMAIL.sub(EMAIL_MASK, o) if o and o.startswith('"') else o) for p, o in pairs]
+
     def block(self, s, pairs):
-        self.triples += write_block(self.out, s, pairs)
+        self.triples += write_block(self.out, s, self._scrub(pairs))
 
     def link_block(self, s, pairs):
-        self.link_triples += write_block(self.links, s, pairs)
+        self.link_triples += write_block(self.links, s, self._scrub(pairs))
 
     def _once(self, kind, key, s, pairs):
         if key not in self.seen[kind]:
@@ -103,6 +110,7 @@ class Writer:
 
     # --- shared nodes ------------------------------------------------------
     def organization(self, name, org_class=None):
+        name = scrub_emails(name)
         s = iri.organization(name)
         self._once("org", s, s, [("a", "ex:Organization"), ("rdfs:label", lit(name)),
                                  ("ex:normalizedName", lit(iri.norm_name(name)))])
@@ -112,12 +120,14 @@ class Writer:
         return s
 
     def person(self, name, affiliation):
+        name, affiliation = scrub_emails(name), scrub_emails(affiliation)
         s = iri.person(name, affiliation)
         self._once("person", s, s, [("a", "ex:Person"), ("rdfs:label", lit(name)),
                                     ("ex:affiliation", lit(affiliation))])
         return s
 
     def condition(self, text):
+        text = scrub_emails(text)
         s = iri.condition(text)
         self._once("cond", s, s, [("a", "ex:Condition"), ("rdfs:label", lit(text))])
         return s

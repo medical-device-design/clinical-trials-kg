@@ -73,7 +73,9 @@ DEVICE_WITH_RESULTS = {
             "centralContacts": [{"name": "Pat Contact", "role": "CONTACT",
                                  "phone": "555-0100", "email": "pat@testco.example.com"}],
             "overallOfficials": [{"name": "Jane Doe, MD", "affiliation": "Testco Medical",
-                                  "role": "PRINCIPAL_INVESTIGATOR"}],
+                                  "role": "PRINCIPAL_INVESTIGATOR"},
+                                 {"name": "Sam Roe sam.roe@uni.example.edu", "affiliation": "sam.roe@uni.example.edu",
+                                  "role": "STUDY_DIRECTOR"}],
             "locations": [
                 {"facility": "Hempstead Clinic", "city": "Hempstead", "state": "New York",
                  "zip": "11549", "country": "United States",
@@ -85,7 +87,8 @@ DEVICE_WITH_RESULTS = {
             {"pmid": "31234567", "type": "RESULT", "citation": "Doe J. Alpha trial. J Wound. 2022.",
              "retractions": [{"pmid": "39999999", "source": "J Wound. 2023"}]},
             {"type": "BACKGROUND", "citation": "Book chapter without PMID."},
-        ], "seeAlsoLinks": [{"label": "Sponsor page", "url": "https://testco.example.com/alpha"}]},
+        ], "seeAlsoLinks": [{"label": "Sponsor page", "url": "https://testco.example.com/alpha"},
+                           {"label": "Write to us", "url": "mailto:info@testco.example.com"}]},
     },
     "resultsSection": {
         "outcomeMeasuresModule": {"outcomeMeasures": [{
