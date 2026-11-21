@@ -1,0 +1,90 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex:   <https://bmedesign.org/clinical-trials-kg/ns/> .
+@prefix sh_:  <https://bmedesign.org/clinical-trials-kg/shapes/> .
+
+# Core rules for clinical-trials-kg. Run per output file with Jena
+# (shacl validate --shapes ontology/shapes/ct.shacl.ttl --data out/page_00001.ttl)
+# or pyshacl in tests. Link files (*.links.ttl) are validated with the data file.
+
+sh_:Study a sh:NodeShape ;
+    sh:targetClass ex:ClinicalStudy ;
+    sh:property [ sh:path ex:nctId ; sh:minCount 1 ; sh:maxCount 1 ;
+                  sh:pattern "^NCT[0-9]{8}$" ] ;
+    sh:property [ sh:path ex:sourceDataset ; sh:minCount 1 ; sh:hasValue "ClinicalTrials.gov" ] ;
+    sh:property [ sh:path ex:retrievedAt ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:date ] ;
+    sh:property [ sh:path ex:hasResults ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path ex:enrollment ; sh:maxCount 1 ; sh:datatype xsd:integer ] ;
+    sh:property [ sh:path ex:leadSponsor ; sh:maxCount 1 ; sh:class ex:Organization ] ;
+    sh:property [ sh:path ex:collaborator ; sh:class ex:Organization ] ;
+    sh:property [ sh:path ex:hasCondition ; sh:class ex:Condition ] ;
+    sh:property [ sh:path ex:conditionMesh ; sh:class ex:MeSHConcept ] ;
+    sh:property [ sh:path ex:hasIntervention ; sh:class ex:Intervention ] ;
+    sh:property [ sh:path ex:hasArm ; sh:class ex:ArmGroup ] ;
+    sh:property [ sh:path ex:hasSite ; sh:class ex:StudySite ] ;
+    sh:property [ sh:path ex:hasOfficial ; sh:class ex:StudyOfficial ] ;
+    sh:property [ sh:path ex:hasOutcomeMeasure ; sh:class ex:OutcomeMeasure ] ;
+    sh:property [ sh:path ex:hasAdverseEventReport ; sh:maxCount 1 ; sh:class ex:AdverseEventReport ] ;
+    sh:property [ sh:path ex:startDate ; sh:maxCount 1 ;
+                  sh:or ( [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ]
+                          [ sh:datatype xsd:gYear ] [ sh:datatype xsd:string ] ) ] ;
+    sh:property [ sh:path ex:completionDate ; sh:maxCount 1 ;
+                  sh:or ( [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ]
+                          [ sh:datatype xsd:gYear ] [ sh:datatype xsd:string ] ) ] .
+
+sh_:Labelled a sh:NodeShape ;
+    sh:targetClass ex:Organization , ex:Person , ex:Condition , ex:MeSHConcept , ex:Country ;
+    sh:property [ sh:path rdfs:label ; sh:minCount 1 ] .
+
+sh_:Intervention a sh:NodeShape ;
+    sh:targetClass ex:Intervention ;
+    sh:property [ sh:path ex:inArm ; sh:class ex:ArmGroup ] .
+
+sh_:Official a sh:NodeShape ;
+    sh:targetClass ex:StudyOfficial ;
+    sh:property [ sh:path ex:person ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Person ] .
+
+sh_:OutcomeMeasure a sh:NodeShape ;
+    sh:targetClass ex:OutcomeMeasure ;
+    sh:property [ sh:path ex:hasGroup ; sh:class ex:OutcomeGroup ] ;
+    sh:property [ sh:path ex:hasMeasurement ; sh:class ex:OutcomeMeasurement ] ;
+    sh:property [ sh:path ex:hasAnalysis ; sh:class ex:StatisticalAnalysis ] ;
+    sh:property [ sh:path ex:hasDenominator ; sh:class ex:DenominatorCount ] .
+
+sh_:Measurement a sh:NodeShape ;
+    sh:targetClass ex:OutcomeMeasurement , ex:DenominatorCount ;
+    sh:property [ sh:path ex:group ; sh:maxCount 1 ; sh:class ex:OutcomeGroup ] ;
+    sh:property [ sh:path ex:value ; sh:maxCount 1 ; sh:datatype xsd:decimal ] .
+
+sh_:Analysis a sh:NodeShape ;
+    sh:targetClass ex:StatisticalAnalysis ;
+    sh:property [ sh:path ex:comparesGroup ; sh:class ex:OutcomeGroup ] ;
+    sh:property [ sh:path ex:pValue ; sh:maxCount 1 ; sh:datatype xsd:decimal ] .
+
+sh_:AEReport a sh:NodeShape ;
+    sh:targetClass ex:AdverseEventReport ;
+    sh:property [ sh:path ex:hasGroup ; sh:class ex:AdverseEventGroup ] ;
+    sh:property [ sh:path ex:hasEvent ; sh:class ex:AdverseEvent ] .
+
+sh_:AdverseEvent a sh:NodeShape ;
+    sh:targetClass ex:AdverseEvent ;
+    sh:property [ sh:path ex:seriousness ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "SERIOUS" "OTHER" ) ] ;
+    sh:property [ sh:path ex:hasStatistic ; sh:class ex:AdverseEventStatistic ] .
+
+sh_:AEStat a sh:NodeShape ;
+    sh:targetClass ex:AdverseEventStatistic ;
+    sh:property [ sh:path ex:group ; sh:maxCount 1 ; sh:class ex:AdverseEventGroup ] ;
+    sh:property [ sh:path ex:numAffected ; sh:maxCount 1 ; sh:datatype xsd:integer ] ;
+    sh:property [ sh:path ex:numAtRisk ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+sh_:Publication a sh:NodeShape ;
+    sh:targetClass ex:Publication ;
+    sh:property [ sh:path ex:pmid ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[0-9]+$" ] .
+
+sh_:FdaLink a sh:NodeShape ;
+    sh:targetClass ex:FdaSubmissionLink ;
+    sh:property [ sh:path ex:study ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:ClinicalStudy ] ;
+    sh:property [ sh:path ex:submissionNumber ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path ex:linkMethod ; sh:minCount 1 ] ;
+    sh:property [ sh:path ex:linkConfidence ; sh:minCount 1 ] .
