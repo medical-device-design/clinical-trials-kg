@@ -2,7 +2,7 @@
 
 | # | Item | Owner | Why it matters |
 |---|---|---|---|
-| 1 | First real run on VM .83. The code has only run on synthetic records. My workspace cannot reach clinicaltrials.gov. | RD | Real records will show fields and shapes the fixtures do not |
+| 1 | First real run on VM .83. The code has only run on synthetic records so far. | RD | Real records will show fields and shapes the fixtures do not |
 | 2 | Confirm the `filter.advanced` syntax (`AREA[InterventionType]DEVICE`, `AREA[LastUpdatePostDate]RANGE[...]`) returns the expected counts (about 76,000 device studies on October 2, 2026) | RD | Wrong filter means a wrong pilot scope |
 | 3 | Licence. Current NLM terms ask for attribution, a processing date and a statement of modifications. Older terms also mention international copyright outside the United States. Decide whether CC0 is right or whether the registry entry should state "U.S. Government work, attribute ClinicalTrials.gov". | RD | Must be settled before the registry PR |
 | 4 | Confirm the `research-award-kg` (formerly nih-reporter-kg) project IRI pattern in `iri.NIH_REPORTER_PROJECT` | RD | Otherwise the NIH grant links point to IRIs that do not exist |
