@@ -1,0 +1,68 @@
+ClinicalTrials.gov Knowledge Graph (clinical-trials-kg)
+CC0 1.0 Universal (Public Domain Dedication)
+
+To the extent possible under law, Hofstra University has waived all copyright
+and related or neighboring rights to the ClinicalTrials.gov Knowledge Graph:
+its ontology, code, transformations, and the compiled graph. This work is
+published from the United States.
+
+Full legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Summary:         https://creativecommons.org/publicdomain/zero/1.0/
+
+This release follows the statement of work of NSF Proto-OKN subaward 5136002
+(prime award #2535091, University of North Carolina at Chapel Hill), which
+provides that the knowledge graph is released under a Creative Commons CC0
+license, and matches the licence of medical-device-kg and the FDA graphs.
+
+You may copy, modify, distribute and use the work, including for commercial
+purposes, without asking permission. Attribution is not required but is
+appreciated.
+
+-----------------------------------------------------------------------------
+SUPPORT
+-----------------------------------------------------------------------------
+
+Supported by NSF award #2535091 (Proto-OKN, subaward 5136002) as part of the
+NSF Proto-OKN Program, and NIH/NIBIB award #R25EB035522.
+
+-----------------------------------------------------------------------------
+UNDERLYING DATA
+-----------------------------------------------------------------------------
+
+Source: ClinicalTrials.gov, U.S. National Library of Medicine. Study records
+are submitted by sponsors and investigators and are provided by NLM at no
+charge. NLM's terms ask users of the data to attribute the source as
+ClinicalTrials.gov, show the date the data were processed, and state any
+modifications. This graph does so:
+
+  * every study carries ex:sourceDataset "ClinicalTrials.gov", its
+    ClinicalTrials.gov page (skos:exactMatch), ex:retrievedAt (download date)
+    and ex:sourceVersionDate (NLM's processing date for the record);
+  * modifications: records are converted to RDF; central contacts, site
+    contacts and the results point of contact are omitted; e-mail addresses
+    in any field are replaced with "[EMAIL REMOVED]"; free text is otherwise
+    unchanged and never truncated.
+
+NLM's terms also prohibit using e-mail addresses extracted from the database
+for marketing. This graph contains none.
+
+-----------------------------------------------------------------------------
+THIRD-PARTY CONTENT EXCLUDED FROM THIS DEDICATION
+-----------------------------------------------------------------------------
+
+Adverse event terms reported by sponsors are often MedDRA terms (see
+ex:sourceVocabulary). MedDRA is a trademark of ICH and its content is licensed
+by the MSSO. MedDRA term text appears here only as submitted to and published
+by ClinicalTrials.gov. It is not covered by this dedication; reuse of MedDRA
+beyond that is subject to MSSO terms (https://www.meddra.org/).
+
+NLM and ClinicalTrials.gov do not endorse this project.
+
+-----------------------------------------------------------------------------
+NO WARRANTY
+-----------------------------------------------------------------------------
+
+Provided "as is", without warranty of any kind. This graph is intended for
+research and education. It is not medical advice and not regulatory advice.
+Study records are as submitted by sponsors. Results and adverse event counts
+are as posted and have not been independently verified.

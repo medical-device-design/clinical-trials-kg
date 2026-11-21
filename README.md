@@ -53,6 +53,10 @@ Every cross-graph link states its method and confidence. None is asserted as ide
 
 The results data model (outcome measures, groups, denominators, measurements, statistical analyses, adverse-event groups and per-group statistics), the field map, partial-date typing and the device-name scorer were first built by **Adelyn Mathew** (HUSSRP 2026, mentor Roche de Guzman) on the `clinicaltrials-harvester` branch of `medical-device-design/medical-device-kg`, last commit `d3be34e`. This repository ports that work to the rebuild standard.
 
-## Data source and terms
+## Licence
 
-Data from ClinicalTrials.gov, U.S. National Library of Medicine. NLM's terms ask users to attribute ClinicalTrials.gov, show the date the data were processed, state any modifications, and not use extracted e-mail addresses for marketing. The graph records `ex:retrievedAt` on every study and links each study to its ClinicalTrials.gov page. The graph licence must be confirmed against the current terms before publication (see `docs/OPEN_ITEMS.md`).
+CC0 1.0 for the code, ontology and compiled graph (see `LICENSE`), the same as medical-device-kg and the FDA graphs. Source data are from ClinicalTrials.gov (U.S. National Library of Medicine). Every study records its source, ClinicalTrials.gov page, retrieval date and NLM processing date, and `LICENSE` states the modifications. MedDRA adverse-event term text is third-party content excluded from the dedication.
+
+## Alignment with the KG family
+
+Shared conventions (namespaces, identifier formats, cross-graph join keys, licence) are being standardized by a central control layer across all of the PI's graphs. Where it differs from this repo, the central standard wins; see `docs/OPEN_ITEMS.md` item 11.
