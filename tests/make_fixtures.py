@@ -26,6 +26,7 @@ DEVICE_WITH_RESULTS = {
         "statusModule": {
             "overallStatus": "COMPLETED",
             "statusVerifiedDate": "2024-03",
+            "expandedAccessInfo": {"hasExpandedAccess": True, "nctId": "NCT09000002"},
             "startDateStruct": {"date": "2019-05", "type": "ACTUAL"},
             "primaryCompletionDateStruct": {"date": "2021-02-28", "type": "ACTUAL"},
             "completionDateStruct": {"date": "2021-06-30", "type": "ACTUAL"},

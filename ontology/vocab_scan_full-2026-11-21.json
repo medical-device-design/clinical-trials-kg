@@ -942,6 +942,16 @@
    ],
    "iri_targets": []
   },
+  "ex:hasExpandedAccessRecord": {
+   "domain": [
+    "ex:ClinicalStudy"
+   ],
+   "iri": 1,
+   "lit": [],
+   "iri_targets": [
+    "ex:ClinicalStudy"
+   ]
+  },
   "ex:hasFlowGroup": {
    "domain": [
     "ex:ClinicalStudy"
@@ -2306,7 +2316,13 @@
   },
   "ex:retrievedAt": {
    "domain": [
-    "ex:ClinicalStudy"
+    "ex:ClinicalStudy",
+    "ex:Condition",
+    "ex:Country",
+    "ex:MeSHConcept",
+    "ex:Organization",
+    "ex:Person",
+    "ex:Publication"
    ],
    "iri": 0,
    "lit": [
@@ -2376,7 +2392,13 @@
   },
   "ex:sourceDataset": {
    "domain": [
-    "ex:ClinicalStudy"
+    "ex:ClinicalStudy",
+    "ex:Condition",
+    "ex:Country",
+    "ex:MeSHConcept",
+    "ex:Organization",
+    "ex:Person",
+    "ex:Publication"
    ],
    "iri": 0,
    "lit": [
@@ -2787,5 +2809,5 @@
    "iri_targets": []
   }
  },
- "note": "full build 2026-11-21, devicematch terms removed (not published), 2 code-only text fields added"
+ "note": "full build 2026-11-21, devicematch terms removed (not published), 2 code-only text fields added; 2026-11-22: hasExpandedAccessRecord added, hub provenance domains added"
 }

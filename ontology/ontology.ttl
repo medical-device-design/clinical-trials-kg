@@ -387,6 +387,10 @@ ex:hasExpandedAccess a owl:DatatypeProperty ;
     rdfs:label "has expanded access" ;
     rdfs:domain ex:ClinicalStudy ;
     rdfs:range xsd:boolean .
+ex:hasExpandedAccessRecord a owl:ObjectProperty ;
+    rdfs:label "has expanded access record" ;
+    rdfs:domain ex:ClinicalStudy ;
+    rdfs:range ex:ClinicalStudy .
 ex:hasFlowGroup a owl:ObjectProperty ;
     rdfs:label "has flow group" ;
     rdfs:domain ex:ClinicalStudy ;
@@ -927,8 +931,8 @@ ex:retractionSource a owl:DatatypeProperty ;
     rdfs:range xsd:string .
 ex:retrievedAt a owl:DatatypeProperty ;
     rdfs:label "retrieved at" ;
-    rdfs:domain ex:ClinicalStudy ;
-    rdfs:range xsd:date .
+    rdfs:range xsd:date ;
+    rdfs:comment "used on ClinicalStudy, Condition, Country, MeSHConcept, Organization, Person, Publication." .
 ex:samplingMethod a owl:DatatypeProperty ;
     rdfs:label "sampling method" ;
     rdfs:domain ex:ClinicalStudy ;
@@ -955,8 +959,8 @@ ex:sizeBytes a owl:DatatypeProperty ;
     rdfs:range xsd:integer .
 ex:sourceDataset a owl:DatatypeProperty ;
     rdfs:label "source dataset" ;
-    rdfs:domain ex:ClinicalStudy ;
-    rdfs:range xsd:string .
+    rdfs:range xsd:string ;
+    rdfs:comment "used on ClinicalStudy, Condition, Country, MeSHConcept, Organization, Person, Publication." .
 ex:sourceRecordId a owl:DatatypeProperty ;
     rdfs:label "source record ID" ;
     rdfs:domain ex:ClinicalStudy ;

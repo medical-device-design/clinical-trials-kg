@@ -91,6 +91,12 @@ def main():
     pubs = list(g.subjects(RDF.type, EX.Publication))
     check("publications carry one label 'PMID N'",
           pubs and all(str(g.value(p, RDFS.label)) == "PMID " + str(g.value(p, EX.pmid)) for p in pubs))
+    check("expanded-access record linked as a study IRI (maps to core:citesStudy)",
+          (S1, EX.hasExpandedAccessRecord, S2) in g)
+    hubs = [s for c in ("Organization", "Person", "Condition", "MeSHConcept", "Publication", "Country")
+            for s in g.subjects(RDF.type, EX[c])]
+    check("every shared hub carries sourceDataset and retrievedAt (master option C)",
+          hubs and all(g.value(h, EX.sourceDataset) and g.value(h, EX.retrievedAt) for h in hubs))
     nih = rdflib.URIRef("https://bmedesign.org/core/id/nih-project/R01EB012345")
     check("NIH link uses the canonical core IRI (ids/identifiers.yaml)", (S1, EX.fundedByNihProject, nih) in g)
     onto = rdflib.Graph().parse(os.path.join(ROOT, "ontology", "ontology.ttl"))

@@ -88,8 +88,9 @@ class Writer:
     """Holds the output streams and the per-file 'already written' sets for
     shared nodes, so each shared node is described once per file."""
 
-    def __init__(self, out, links, preferred=None, collect=False):
+    def __init__(self, out, links, preferred=None, collect=False, retrieved_at=None):
         self.out, self.links = out, links
+        self.retrieved_at = retrieved_at
         self.seen = {k: set() for k in ("org", "person", "cond", "mesh", "pub", "country", "alt")}
         self.triples = 0
         self.link_triples = 0
@@ -124,9 +125,16 @@ class Writer:
         self.link_triples += write_block(self.links, s, self._scrub(pairs))
 
     def _once(self, kind, key, s, pairs):
+        """Shared hub node (organization, person, condition, MeSH term, publication,
+        country), written once per page. Hubs carry their own provenance: source and
+        snapshot date (bmedesign-kg decision, November 21, 2026: hubs keep their own
+        provenance, part-of-record nodes inherit their study's through the IRI)."""
         if key not in self.seen[kind]:
             self.seen[kind].add(key)
-            self.block(s, pairs)
+            hub = [("ex:sourceDataset", lit(DATASET))]
+            if self.retrieved_at is not None:
+                hub.append(("ex:retrievedAt", date_lit(self.retrieved_at)))
+            self.block(s, pairs + hub)
 
     # --- shared nodes ------------------------------------------------------
     def organization(self, name, org_class=None):
@@ -174,6 +182,14 @@ class Writer:
         label = self._label("country", s, name)
         self._once("country", s, s, [("a", "ex:Country"), ("rdfs:label", lit(label))])
         return s
+
+
+def _ea_link(nct):
+    """Study IRI of an expanded-access record, or None when absent or malformed."""
+    try:
+        return iri.study(nct) if nct else None
+    except ValueError:
+        return None
 
 
 def convert_study(w, rec, retrieved_at):
@@ -259,6 +275,8 @@ def convert_study(w, rec, retrieved_at):
         ("ex:dispositionFirstSubmitQcDate", date_lit(status.get("dispFirstSubmitQcDate"))),
         ("ex:hasExpandedAccess", bool_lit(_g(status, "expandedAccessInfo", "hasExpandedAccess"))),
         ("ex:expandedAccessNctId", lit(_g(status, "expandedAccessInfo", "nctId"))),
+        # the expanded-access record as a study link, mapped to core:citesStudy by the master
+        ("ex:hasExpandedAccessRecord", _ea_link(_g(status, "expandedAccessInfo", "nctId"))),
         ("ex:expandedAccessStatus", lit(_g(status, "expandedAccessInfo", "statusForNctId"))),
         ("ex:patientRegistry", bool_lit(design.get("patientRegistry"))),
         ("ex:targetDuration", lit(design.get("targetDuration"))),
@@ -843,7 +861,7 @@ def convert_page(in_path, out_dir, retrieved_at, preferred=None):
          open(link_p + ".tmp", "w", encoding="utf-8") as links:
         out.write(PREFIX + "\n")
         links.write(PREFIX + "\n")
-        w = Writer(out, links, preferred)
+        w = Writer(out, links, preferred, retrieved_at=retrieved_at)
         for rec in studies or []:
             try:
                 if convert_study(w, rec, retrieved_at):
