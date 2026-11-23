@@ -942,16 +942,6 @@
    ],
    "iri_targets": []
   },
-  "ex:hasExpandedAccessRecord": {
-   "domain": [
-    "ex:ClinicalStudy"
-   ],
-   "iri": 1,
-   "lit": [],
-   "iri_targets": [
-    "ex:ClinicalStudy"
-   ]
-  },
   "ex:hasFlowGroup": {
    "domain": [
     "ex:ClinicalStudy"
@@ -2809,5 +2799,5 @@
    "iri_targets": []
   }
  },
- "note": "full build 2026-11-21, devicematch terms removed (not published), 2 code-only text fields added; 2026-11-22: hasExpandedAccessRecord added, hub provenance domains added"
+ "note": "full build 2026-11-21, devicematch terms removed (not published), 2 code-only text fields added; 2026-11-22: hub provenance domains added"
 }

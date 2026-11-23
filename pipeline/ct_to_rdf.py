@@ -184,14 +184,6 @@ class Writer:
         return s
 
 
-def _ea_link(nct):
-    """Study IRI of an expanded-access record, or None when absent or malformed."""
-    try:
-        return iri.study(nct) if nct else None
-    except ValueError:
-        return None
-
-
 def convert_study(w, rec, retrieved_at):
     """Write all triples for one study. Returns the NCT ID, or None if skipped."""
     ps = rec.get("protocolSection") or {}
@@ -275,8 +267,6 @@ def convert_study(w, rec, retrieved_at):
         ("ex:dispositionFirstSubmitQcDate", date_lit(status.get("dispFirstSubmitQcDate"))),
         ("ex:hasExpandedAccess", bool_lit(_g(status, "expandedAccessInfo", "hasExpandedAccess"))),
         ("ex:expandedAccessNctId", lit(_g(status, "expandedAccessInfo", "nctId"))),
-        # the expanded-access record as a study link, mapped to core:citesStudy by the master
-        ("ex:hasExpandedAccessRecord", _ea_link(_g(status, "expandedAccessInfo", "nctId"))),
         ("ex:expandedAccessStatus", lit(_g(status, "expandedAccessInfo", "statusForNctId"))),
         ("ex:patientRegistry", bool_lit(design.get("patientRegistry"))),
         ("ex:targetDuration", lit(design.get("targetDuration"))),

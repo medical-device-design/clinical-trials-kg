@@ -387,10 +387,6 @@ ex:hasExpandedAccess a owl:DatatypeProperty ;
     rdfs:label "has expanded access" ;
     rdfs:domain ex:ClinicalStudy ;
     rdfs:range xsd:boolean .
-ex:hasExpandedAccessRecord a owl:ObjectProperty ;
-    rdfs:label "has expanded access record" ;
-    rdfs:domain ex:ClinicalStudy ;
-    rdfs:range ex:ClinicalStudy .
 ex:hasFlowGroup a owl:ObjectProperty ;
     rdfs:label "has flow group" ;
     rdfs:domain ex:ClinicalStudy ;

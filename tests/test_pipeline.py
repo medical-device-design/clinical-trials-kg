@@ -91,8 +91,6 @@ def main():
     pubs = list(g.subjects(RDF.type, EX.Publication))
     check("publications carry one label 'PMID N'",
           pubs and all(str(g.value(p, RDFS.label)) == "PMID " + str(g.value(p, EX.pmid)) for p in pubs))
-    check("expanded-access record linked as a study IRI (maps to core:citesStudy)",
-          (S1, EX.hasExpandedAccessRecord, S2) in g)
     hubs = [s for c in ("Organization", "Person", "Condition", "MeSHConcept", "Publication", "Country")
             for s in g.subjects(RDF.type, EX[c])]
     check("every shared hub carries sourceDataset and retrievedAt (master option C)",
