@@ -65,7 +65,7 @@ def main():
     check("rerun is byte-identical", digest(out) == digest(out2))
 
     print("legacy bugs fixed")
-    dfu = rdflib.URIRef(ID + "condition/diabetic-foot-ulcer")
+    dfu = rdflib.URIRef(ID + "condition/diabetic_foot_ulcer")
     check("both studies link to the shared condition (legacy linked only the first)",
           (S1, EX.hasCondition, dfu) in g and (S2, EX.hasCondition, dfu) in g)
     serious = list(g.subjects(EX.seriousness, rdflib.Literal("SERIOUS")))

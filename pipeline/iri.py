@@ -65,11 +65,13 @@ def slug(value, what):
     n = norm_name(_req(value, what))
     if not n:
         # name made only of punctuation or non-Latin characters
-        n = "h-" + hashlib.sha1(str(value).encode("utf-8")).hexdigest()[:16]
+        n = "h_" + hashlib.sha1(str(value).encode("utf-8")).hexdigest()[:16]
         return n
-    s = n.replace(" ", "-")
+    # slug separator "_" (family ruling, bmedesign-kg DECISIONS November 21, 2026,
+    # same as medical-device-kg); path segment names such as outcome-measure keep "-"
+    s = n.replace(" ", "_")
     if len(s) > 80:
-        s = s[:64].rstrip("-") + "-" + hashlib.sha1(n.encode()).hexdigest()[:12]
+        s = s[:64].rstrip("_") + "_" + hashlib.sha1(n.encode()).hexdigest()[:12]
     return s
 
 
@@ -100,7 +102,7 @@ def organization(name):
 def person(name, affiliation=None):
     key = slug(name, "person")
     if affiliation and norm_name(affiliation):
-        key += "--" + slug(affiliation, "person affiliation")
+        key += "__" + slug(affiliation, "person affiliation")
     return _u(f"person/{key}")
 
 
@@ -187,7 +189,7 @@ def _selftest():
         except ValueError:
             pass
     assert organization("Medtronic, Inc.") == organization("MEDTRONIC INC")
-    assert organization("Medtronic, Inc.").endswith("organization/medtronic-inc>")
+    assert organization("Medtronic, Inc.").endswith("organization/medtronic_inc>")
     assert organization("Hôpital Necker") == organization("Hopital Necker")
     long_name = "A" * 50 + " " + "B" * 60
     assert len(organization(long_name)) < 200
